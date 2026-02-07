@@ -28,4 +28,27 @@ const content = document.getElementById("content");
 const days = document.querySelectorAll(".day");
 const roseContainer = document.getElementById("rose-container");
 const rose = document.querySelector(".rose-svg");
-const roseText = document.get
+const roseText = document.getElementById("rose-text");
+
+// Highlight current day
+days.forEach((day) => {
+  if (parseInt(day.dataset.day) === dayNumber) {
+    day.classList.add("active");
+  }
+});
+
+// Show message
+if (messages[dayNumber] && content) {
+  content.textContent = messages[dayNumber];
+}
+
+// Rose interaction
+if (rose) {
+  rose.addEventListener("click", () => {
+    rose.classList.add("bloom");
+
+    if (roseText) {
+      roseText.classList.add("show");
+    }
+  });
+}
