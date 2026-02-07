@@ -1,146 +1,132 @@
-body {
-  margin: 0;
-  padding: 20px;
-  font-family: 'Georgia', serif;
-  background: linear-gradient(to bottom, #ffe6eb, #ffffff);
-  text-align: center;
-}
+// Days configuration
+const days = [
+  {
+    name: "Rose Day",
+    content: `
+      🌹 A rose for the girl who made my world softer.
+      <br><br>
+      Click the rose below… it has something to say.
+    `,
+    rose: true
+  },
+  {
+    name: "Propose Day",
+    content: `
+      💍 If I had to choose again,
+      I’d still choose you — every lifetime.
+    `
+  },
+  {
+    name: "Chocolate Day",
+    content: `
+      🍫 Sweet like chocolates,
+      but still not sweeter than you.
+    `
+  },
+  {
+    name: "Teddy Day",
+    content: `
+      🧸 If you were a teddy,
+      I’d never let you go.
+    `
+  },
+  {
+    name: "Promise Day",
+    content: `
+      🤞 I promise to choose you,
+      even on the hardest days.
+    `
+  },
+  {
+    name: "Hug Day",
+    content: `
+      🤍 Close your eyes.
+      This page is a hug from me to you.
+    `
+  },
+  {
+    name: "Kiss Day",
+    content: `
+      💋 If this screen could kiss,
+      it would linger.
+    `
+  },
+  {
+    name: "Valentine’s Day",
+    content: `
+      ❤️ This website ends here.
+      <br><br>
+      But my love for you doesn’t.
+    `
+  }
+];
 
-h1 {
-  color: #b3003b;
-}
+let currentDay = 0;
 
-.subtitle {
-  color: #555;
-  margin-bottom: 30px;
-}
+// Elements
+const contentDiv = document.getElementById("content");
+const daysDiv = document.querySelectorAll(".day");
+const roseContainer = document.getElementById("rose-container");
+const roseSvg = document.querySelector(".rose-svg");
+const roseText = document.getElementById("rose-text");
+const secretText = document.querySelector(".secret");
 
-/* Timeline */
-.timeline {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 30px;
-}
+// Initial load
+loadDay(0);
 
-.day {
-  padding: 10px 15px;
-  border-radius: 20px;
-  background: #ddd;
-  color: #777;
-  cursor: not-allowed;
-  font-size: 0.9em;
-}
+// Attach click listeners
+daysDiv.forEach((day, index) => {
+  day.addEventListener("click", () => {
+    if (day.classList.contains("active") || day.classList.contains("unlocked")) {
+      loadDay(index);
+    }
+  });
+});
 
-.day.active {
-  background: #ff4d79;
-  color: white;
-  cursor: pointer;
-}
+function loadDay(index) {
+  currentDay = index;
 
-.day.unlocked {
-  background: #ffb3c6;
-  color: #6b0022;
-  cursor: pointer;
-}
+  // Update content
+  contentDiv.innerHTML = days[index].content;
 
-/* Content */
-#content {
-  font-size: 1.2em;
-  color: #333;
-  max-width: 600px;
-  margin: auto;
-  line-height: 1.6;
-}
+  // Update timeline
+  daysDiv.forEach((d, i) => {
+    d.classList.remove("active");
+    if (i < index) d.classList.add("unlocked");
+    if (i === index) d.classList.add("active");
+  });
 
-/* Rose Section */
-#rose-container {
-  margin-top: 30px;
-}
-
-.hidden {
-  display: none;
-}
-
-/* SVG Rose */
-.rose-svg {
-  width: 120px;
-  margin: auto;
-  cursor: pointer;
-  transition: transform 1.5s ease;
-}
-
-.rose-svg svg {
-  width: 100%;
-}
-
-.petal {
-  fill: #c9184a;
-  transform-origin: center;
-  transition: transform 1.5s ease;
-}
-
-.stem {
-  fill: #2d6a4f;
-}
-
-.bloom .petal {
-  transform: scale(1.3);
-}
-
-.bloom {
-  transform: scale(1.2);
-}
-
-/* Rose Text */
-#rose-text {
-  margin-top: 20px;
-  font-size: 1.1em;
-  color: #b3003b;
-  opacity: 0;
-  transition: opacity 1.5s ease;
-}
-
-#rose-text.show {
-  opacity: 1;
-}
-
-/* Secret Message */
-.secret {
-  margin-top: 25px;
-  font-size: 1em;
-  color: #6b0022;
-  opacity: 0;
-  transition: opacity 2s ease;
-}
-
-.secret.show {
-  opacity: 1;
-}
-
-/* Floating Petals */
-#petals {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: -1;
-}
-
-.petal-float {
-  position: absolute;
-  top: -50px;
-  font-size: 20px;
-  animation: fall linear infinite;
-  opacity: 0.8;
-}
-
-@keyframes fall {
-  to {
-    transform: translateY(110vh) rotate(360deg);
+  // Rose logic
+  if (days[index].rose) {
+    roseContainer.classList.remove("hidden");
+  } else {
+    roseContainer.classList.add("hidden");
   }
 }
+
+// Rose click animation
+roseSvg.addEventListener("click", () => {
+  roseSvg.classList.add("bloom");
+  roseText.classList.add("show");
+  secretText.classList.add("show");
+});
+
+// Floating petals
+const petalsContainer = document.getElementById("petals");
+
+function createPetal() {
+  const petal = document.createElement("div");
+  petal.classList.add("petal-float");
+  petal.innerHTML = "🌸";
+  petal.style.left = Math.random() * 100 + "vw";
+  petal.style.animationDuration = 5 + Math.random() * 5 + "s";
+  petal.style.fontSize = 16 + Math.random() * 20 + "px";
+
+  petalsContainer.appendChild(petal);
+
+  setTimeout(() => {
+    petal.remove();
+  }, 10000);
+}
+
+setInterval(createPetal, 400);
