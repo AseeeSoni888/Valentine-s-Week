@@ -1,0 +1,54 @@
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: 'Georgia', serif;
+  background: linear-gradient(to bottom, #ffe6eb, #ffffff);
+  text-align: center;
+}
+
+h1 {
+  color: #b3003b;
+  margin-top: 10px;
+}
+
+.subtitle {
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.timeline {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.day {
+  padding: 10px 15px;
+  border-radius: 20px;
+  background: #ddd;
+  color: #777;
+  cursor: not-allowed;
+  font-size: 0.9em;
+}
+
+.day.active {
+  background: #ff4d79;
+  color: white;
+  cursor: pointer;
+}
+
+.day.unlocked {
+  background: #ffb3c6;
+  color: #6b0022;
+  cursor: pointer;
+}
+
+#content {
+  font-size: 1.2em;
+  color: #333;
+  max-width: 600px;
+  margin: auto;
+  line-height: 1.6;
+}
