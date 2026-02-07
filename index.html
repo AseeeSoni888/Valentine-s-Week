@@ -21,7 +21,37 @@
     <div class="day" data-day="7">❤️ Valentine’s Day</div>
   </div>
 
+  <!-- Rose Animation Section -->
+  <div id="rose-container" class="hidden">
+    <div class="rose-svg" onclick="bloomRose()">
+      <svg viewBox="0 0 200 200">
+        <g id="rose">
+          <circle cx="100" cy="80" r="25" class="petal"/>
+          <circle cx="85" cy="95" r="25" class="petal"/>
+          <circle cx="115" cy="95" r="25" class="petal"/>
+          <circle cx="100" cy="110" r="25" class="petal"/>
+        </g>
+        <rect x="95" y="120" width="10" height="50" class="stem"/>
+      </svg>
+    </div>
+
+    <p id="rose-text"></p>
+
+    <p id="secret" class="secret hidden">
+      There’s something I don’t say often…  
+      You make me feel safe being myself 🤍
+    </p>
+  </div>
+
   <div id="content"></div>
+
+  <!-- Floating Petals -->
+  <div id="petals"></div>
+
+  <!-- Background Music -->
+  <audio id="bg-music" loop>
+    <source src="music.mp3" type="audio/mp3">
+  </audio>
 
   <script src="script.js"></script>
 </body>
