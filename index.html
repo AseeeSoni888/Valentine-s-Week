@@ -13,6 +13,7 @@
   <h1>Seven Days, One Love</h1>
   <p class="subtitle">This page blooms a little more every day…</p>
 
+  <!-- Timeline -->
   <div class="timeline">
     <div class="day" data-day="1">🌹 Rose Day</div>
     <div class="day" data-day="2">💌 Propose Day</div>
@@ -43,8 +44,8 @@
   <!-- Propose Day -->
   <div id="proposal" class="hidden">
     <h2>Will you be mine? 💌</h2>
-    <button class="choice-btn" id="yes-btn">YES</button>
-    <button class="choice-btn" id="always-btn">ALWAYS</button>
+    <button id="yes-btn" class="choice-btn">YES</button>
+    <button id="always-btn" class="choice-btn">ALWAYS</button>
   </div>
 
   <!-- Hug animation -->
@@ -56,11 +57,11 @@
 
   <!-- Fullscreen Heart -->
   <div id="fullscreen-heart" class="hidden">
-    ❤️
+    <div class="heart">❤️</div>
     <p class="heart-text" id="heart-msg">You chose us ❤️</p>
   </div>
 
-  <!-- Confetti Canvas -->
+  <!-- Confetti canvas -->
   <canvas id="confetti-canvas" class="hidden"></canvas>
 
   <!-- Background Music -->
