@@ -8,13 +8,11 @@
 </head>
 <body>
 
-  <!-- Music Button -->
   <button id="music-btn">🎵 Play Music</button>
 
   <h1>Seven Days, One Love</h1>
   <p class="subtitle">This page blooms a little more every day…</p>
 
-  <!-- Timeline -->
   <div class="timeline">
     <div class="day" data-day="1">🌹 Rose Day</div>
     <div class="day" data-day="2">💌 Propose Day</div>
@@ -43,28 +41,27 @@
   </div>
 
   <!-- Propose Day -->
-  <div id="propose" class="section hidden">
-
-    <div class="hug-wrapper">
-      <div class="person left">🧍‍♂️</div>
-      <div class="person right">🧍‍♀️</div>
-    </div>
-
+  <div id="proposal" class="hidden">
     <h2>Will you be mine? 💌</h2>
-
-    <div class="btn-row">
-      <button class="choice-btn" data-answer="YES">YES</button>
-      <button class="choice-btn" data-answer="ALWAYS">ALWAYS</button>
-    </div>
-
+    <button class="choice-btn" id="yes-btn">YES</button>
+    <button class="choice-btn" id="always-btn">ALWAYS</button>
   </div>
 
-  <!-- Fullscreen Heart & Confetti -->
+  <!-- Hug animation -->
+  <div id="hug" class="hug hidden">
+    <div class="person left">🧍‍♂️</div>
+    <div class="person right">🧍‍♀️</div>
+    <div class="hug-text">A warm hug, just for you 🤍</div>
+  </div>
+
+  <!-- Fullscreen Heart -->
   <div id="fullscreen-heart" class="hidden">
     ❤️
-    <p class="heart-text" id="heart-msg"></p>
-    <canvas id="confetti-canvas"></canvas>
+    <p class="heart-text" id="heart-msg">You chose us ❤️</p>
   </div>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confetti-canvas" class="hidden"></canvas>
 
   <!-- Background Music -->
   <audio id="bg-music" loop>
