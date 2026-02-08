@@ -6,15 +6,12 @@ const rose = document.getElementById("rose");
 const music = document.getElementById("bg-music");
 const musicBtn = document.getElementById("music-btn");
 
-// 🔓 MAKE EVERY DAY CLICKABLE (NO DATE LOCKING)
+// Make all days clickable
 days.forEach(day => {
-  day.addEventListener("click", () => {
-    loadDay(+day.dataset.day);
-  });
+  const d = +day.dataset.day;
 
-  day.addEventListener("touchstart", () => {
-    loadDay(+day.dataset.day);
-  }, { passive: true });
+  day.addEventListener("click", () => loadDay(d));
+  day.addEventListener("touchstart", () => loadDay(d), { passive: true });
 });
 
 function reset() {
@@ -44,23 +41,48 @@ function loadDay(day) {
   }
 }
 
-// 🌹 Rose click
+// Rose bloom
 rose.addEventListener("click", () => {
   rose.classList.add("bloom");
 });
 
-// 💌 Proposal buttons
-document.getElementById("yes-btn").onclick =
-document.getElementById("always-btn").onclick = () => {
-  alert("You chose us ❤️");
-};
+// 🎉 CONFETTI FUNCTION
+function launchConfetti() {
+  for (let i = 0; i < 80; i++) {
+    const confetti = document.createElement("div");
+    confetti.className = "confetti";
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.background =
+      ["#ff4d79", "#ffd6e0", "#fff", "#ff99ac"][Math.floor(Math.random() * 4)];
+    confetti.style.animationDuration = 2 + Math.random() * 2 + "s";
+    document.body.appendChild(confetti);
 
-// 🎵 Music (user interaction safe)
+    setTimeout(() => confetti.remove(), 4000);
+  }
+}
+
+// ❤️ HEART OVERLAY
+function showLove() {
+  const overlay = document.createElement("div");
+  overlay.id = "love-overlay";
+  overlay.innerHTML = `❤️<p>You chose us ❤️</p>`;
+  document.body.appendChild(overlay);
+
+  launchConfetti();
+
+  setTimeout(() => overlay.remove(), 3500);
+}
+
+// Proposal buttons
+document.getElementById("yes-btn").onclick = showLove;
+document.getElementById("always-btn").onclick = showLove;
+
+// Music (user gesture safe)
 musicBtn.onclick = () => {
   music.volume = 0.4;
   music.play();
   musicBtn.innerText = "🎶 Playing";
 };
 
-// Load Rose Day by default
+// Load Rose Day initially
 loadDay(1);
