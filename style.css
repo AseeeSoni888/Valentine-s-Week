@@ -1,105 +1,75 @@
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
 }
 
 body {
-  margin: 0;
-  padding: 20px;
-  font-family: Georgia, serif;
-  background: linear-gradient(to bottom, #ffe6eb, #ffffff);
-  text-align: center;
-}
-
-/* IMPORTANT: no pointer-events here */
-.hidden {
-  display: none !important;
-}
-
-/* Timeline */
-.timeline {
+  height: 100vh;
+  background: radial-gradient(circle at top, #ff7eb3, #ff2e63);
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
+  align-items: center;
+  overflow: hidden;
 }
 
-.day {
-  padding: 10px 16px;
-  border-radius: 20px;
-  background: #ddd;
-  cursor: pointer;
+/* Canvas NEVER blocks clicks */
+canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
 }
 
-.day.unlocked {
-  background: #ffb3c6;
-}
-
-.day.active {
-  background: #ff4d79;
+/* Main Content */
+.container {
+  z-index: 10;
+  text-align: center;
   color: white;
+  padding: 20px;
 }
 
-/* Content */
-#content {
-  font-size: 1.2em;
-  margin: 20px auto;
-}
-
-/* Proposal Section */
-#proposal {
-  position: relative;
-  z-index: 5; /* ensures it is on top */
+h1 {
+  margin-bottom: 25px;
+  font-size: 2rem;
 }
 
 /* Buttons */
-.choice-btn {
-  padding: 14px 32px;
-  font-size: 1.1em;
-  margin: 12px;
+button {
+  padding: 15px 28px;
+  font-size: 1.1rem;
+  border: none;
   border-radius: 30px;
-  border: none;
-  background: #ff4d79;
-  color: white;
   cursor: pointer;
-  pointer-events: auto; /* 🔑 force clicks */
-  touch-action: manipulation; /* mobile fix */
+  margin: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Fullscreen Heart */
-#fullscreen-heart {
-  position: fixed;
-  inset: 0;
-  background: rgba(255, 77, 121, 0.95);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 100px;
-  animation: pulse 1.2s infinite;
-  z-index: 999;
+button:active {
+  transform: scale(0.95);
 }
 
-.heart-text {
-  font-size: 1.5rem;
+#proposeBtn {
+  background: white;
+  color: #ff2e63;
+  font-weight: bold;
+}
+
+.choice {
   color: white;
 }
 
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.15); }
-  100% { transform: scale(1); }
+.yes {
+  background: #00d084;
 }
 
-/* Music */
-#music-btn {
-  position: fixed;
-  top: 15px;
-  right: 15px;
-  border: none;
-  background: #ff4d79;
-  color: white;
-  padding: 10px 16px;
-  border-radius: 20px;
-  cursor: pointer;
+.always {
+  background: #ffd166;
+  color: #333;
+}
+
+/* Hidden */
+.hidden {
+  display: none;
 }
