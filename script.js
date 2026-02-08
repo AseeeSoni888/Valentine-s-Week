@@ -2,12 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const messages = {
     1: "Tap the rose 🌹",
-    2: "I don’t know where life takes us, but I know who I want beside me 💌",
+    2: "I don’t know what the future holds… but I know I want you in it 💍",
     3: "Life tastes sweeter with you 🍫",
     4: "Whenever life feels heavy, I hope you feel held 🧸",
     5: "I promise effort, respect, and choosing you — every day 🤝",
     6: "Some feelings don’t need words 😘",
-    7: "Every day with you feels like Valentine’s Day ❤️"
+    7: "❤️"
   };
 
   const content = document.getElementById("content");
@@ -17,72 +17,62 @@ document.addEventListener("DOMContentLoaded", () => {
   const roseText = document.getElementById("rose-text");
   const secret = document.getElementById("secret");
   const music = document.getElementById("bg-music");
+  const proposalActions = document.getElementById("proposal-actions");
+  const response = document.getElementById("proposal-response");
+  const overlay = document.getElementById("valentine-overlay");
 
-  // Enable clicking for ALL days (for now)
-  days.forEach((day) => {
-    day.style.cursor = "pointer";
+  loadDay(2); // Today = Propose Day
 
+  days.forEach(day => {
     day.addEventListener("click", () => {
-      const d = parseInt(day.dataset.day);
-
-      // Highlight
-      days.forEach(el => el.classList.remove("active"));
-      day.classList.add("active");
-
-      // Content
-      content.textContent = messages[d];
-
-      // Rose only on Day 1
-      if (d === 1) {
-        roseContainer.classList.remove("hidden");
-      } else {
-        roseContainer.classList.add("hidden");
-      }
+      loadDay(parseInt(day.dataset.day));
     });
   });
 
-  // Default load
-  content.textContent = messages[1];
-  roseContainer.classList.remove("hidden");
+  function loadDay(d) {
+    days.forEach(x => x.classList.remove("active"));
+    document.querySelector(`.day[data-day="${d}"]`).classList.add("active");
 
-  // Rose click
-  if (rose) {
-    rose.addEventListener("click", () => {
-      rose.classList.add("bloom");
+    content.innerHTML = messages[d];
 
-      if (music) {
-        music.volume = 0.4;
-        music.play().catch(() => {});
-      }
+    roseContainer.classList.toggle("hidden", d !== 1);
+    proposalActions.classList.toggle("hidden", d !== 2);
+    overlay.classList.toggle("hidden", d !== 7);
+  }
 
-      startPetals();
+  rose?.addEventListener("click", () => {
+    rose.classList.add("bloom");
+    music.volume = 0.4;
+    music.play().catch(()=>{});
 
-      setTimeout(() => {
-        roseText.textContent =
-          "I don’t need a garden of roses. I just need one — and that’s you.";
-        roseText.classList.add("show");
+    roseText.textContent =
+      "I don’t need a garden of roses. I just need one — and that’s you.";
+    roseText.classList.add("show");
+    secret.classList.remove("hidden");
+    secret.classList.add("show");
 
-        setTimeout(() => {
-          secret.classList.add("show");
-        }, 600);
-      }, 900);
-    });
+    startPetals();
+  });
+
+  document.getElementById("yes-btn").onclick = () => respond("She said YES ❤️");
+  document.getElementById("always-btn").onclick = () => respond("Always. Forever. 💍");
+
+  function respond(text) {
+    response.textContent = text;
+    response.classList.remove("hidden");
+    response.classList.add("heart-pulse");
   }
 
   function startPetals() {
-    const petalsContainer = document.getElementById("petals");
-
+    const c = document.getElementById("petals");
     for (let i = 0; i < 15; i++) {
-      const petal = document.createElement("div");
-      petal.className = "petal-float";
-      petal.textContent = "🌸";
-
-      petal.style.left = Math.random() * 100 + "vw";
-      petal.style.animationDuration = 5 + Math.random() * 5 + "s";
-      petal.style.fontSize = 14 + Math.random() * 12 + "px";
-
-      petalsContainer.appendChild(petal);
-      setTimeout(() => petal.remove(), 10000);
+      const p = document.createElement("div");
+      p.className = "petal-float";
+      p.textContent = "🌸";
+      p.style.left = Math.random() * 100 + "vw";
+      p.style.animationDuration = 5 + Math.random() * 5 + "s";
+      c.appendChild(p);
+      setTimeout(() => p.remove(), 10000);
     }
   }
 
