@@ -10,42 +10,112 @@ h1 { color: #b3003b; }
 .subtitle { color: #555; margin-bottom: 30px; }
 
 /* Timeline */
-.timeline { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
-.day { padding: 10px 15px; border-radius: 20px; background: #ddd; cursor: not-allowed; user-select: none; }
-.day.unlocked { background: #ffb3c6; cursor: pointer; color: #6b0022; }
-.day.active { background: #ff4d79; color: white; cursor: pointer; }
+.timeline {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.day {
+  padding: 10px 15px;
+  border-radius: 20px;
+  background: #ddd;
+  cursor: not-allowed;
+  user-select: none;
+}
+
+.day.unlocked { background: #ffb3c6; cursor: pointer; }
+.day.active { background: #ff4d79; color: white; }
+
+/* Hidden helper */
+.hidden { display: none; }
 
 /* Buttons */
-.choice-btn { padding: 12px 25px; font-size: 1.1em; margin: 10px; border-radius: 30px; border: none; background: #ff4d79; color: white; cursor: pointer; }
+.choice-btn {
+  padding: 12px 25px;
+  font-size: 1.1em;
+  margin: 10px;
+  border-radius: 30px;
+  border: none;
+  background: #ff4d79;
+  color: white;
+  cursor: pointer;
+}
 
 /* Rose */
 .rose-svg { width: 120px; margin: auto; cursor: pointer; }
-.petal { fill: #c9184a; transition: transform 1.5s ease; transform-origin: center; }
+.petal { fill: #c9184a; }
 .stem { fill: #2d6a4f; }
-.bloom .petal { transform: scale(1.3); }
-.bloom { transform: scale(1.2); }
-
-/* Sections */
-.hidden { display: none; }
-#content { font-size: 1.2em; max-width: 600px; margin: auto; line-height: 1.6; margin-bottom: 20px; }
-
-/* Hug */
-.hug { display: flex; justify-content: center; align-items: center; gap: 20px; margin-top: 20px; font-size: 50px; }
-.hug-text { margin-top: 10px; font-size: 1.2em; }
-
-/* Heart */
-#fullscreen-heart { position: fixed; inset: 0; background: rgba(255,77,121,0.95); font-size: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center; pointer-events: none; z-index: 999; opacity: 0; transition: opacity 0.3s; }
-.pulse-animation { opacity: 1; animation: pulse 1.2s infinite; }
-.heart-text { font-size: 1.5rem; color: white; margin-top:20px; }
-@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+.bloom { transform: scale(1.2); transition: transform 1s ease; }
 
 /* Envelope */
-#envelope { position: fixed; inset: 0; display: flex; justify-content: center; align-items: center; z-index: 1000; pointer-events: none; }
-.envelope-content { background: #fff0f5; padding: 25px 40px; border-radius: 15px; font-size: 1.5rem; color: #b3003b; box-shadow: 0 0 15px rgba(0,0,0,0.3); animation: envelope-drop 1s ease forwards; }
-@keyframes envelope-drop { 0% { transform: translateY(-200px) scale(0.5); opacity:0; } 100% { transform: translateY(0) scale(1); opacity:1; } }
+#envelope {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff5f7;
+  padding: 20px 40px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  z-index: 1000;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #b3003b;
+}
+
+/* Hug */
+.hug {
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 3rem;
+  z-index: 1000;
+}
+
+.hug-text {
+  font-size: 1.2rem;
+  color: #b3003b;
+  position: absolute;
+  bottom: -30px;
+}
+
+/* Fullscreen Heart */
+#fullscreen-heart {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,77,121,0.8);
+  font-size: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: pulse 1.2s infinite;
+  z-index: 999;
+}
+
+/* Pulse animation */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
 
 /* Confetti */
-#confetti-canvas { position: fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:998; }
+.confetti-piece {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background-color: #ff4d79;
+  z-index: 2000;
+  animation: fall 3s linear forwards;
+}
 
-/* Music Button */
-#music-btn { margin-bottom: 15px; padding: 8px 16px; border-radius: 20px; border:none; background:#ff4d79; color:white; cursor:pointer; font-size:1em; }
+@keyframes fall {
+  0% { transform: translateY(-10px) rotate(0deg); }
+  100% { transform: translateY(100vh) rotate(360deg); }
+}
