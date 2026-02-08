@@ -6,6 +6,7 @@ body {
   text-align: center;
 }
 
+/* Timeline */
 .timeline {
   display: flex;
   justify-content: center;
@@ -30,6 +31,7 @@ body {
   color: white;
 }
 
+/* Utility */
 .hidden {
   display: none !important;
 }
@@ -57,18 +59,22 @@ body {
 .petal { fill: #c9184a; }
 .stem { fill: #2d6a4f; }
 
-/* Fullscreen Heart */
+/* ❤️ Fullscreen Heart — NO display here */
 #fullscreen-heart {
   position: fixed;
   inset: 0;
   background: rgba(255, 77, 121, 0.95);
   font-size: 90px;
+  z-index: 999;
+}
+
+/* Visible state (JS-controlled) */
+#fullscreen-heart.show {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   animation: pulse 1.2s infinite;
-  z-index: 999;
 }
 
 .heart-text {
