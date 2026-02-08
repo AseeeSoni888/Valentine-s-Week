@@ -1,78 +1,119 @@
-* {
+body {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
+  padding: 20px;
+  font-family: Georgia, serif;
+  background: linear-gradient(to bottom, #ffe6eb, #ffffff);
+  text-align: center;
 }
 
-body {
-  height: 100vh;
-  background: radial-gradient(circle at top, #ff7eb3, #ff2e63);
+.timeline {
   display: flex;
   justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
 }
 
-/* Canvas NEVER blocks clicks */
-canvas {
+.day {
+  padding: 10px 15px;
+  border-radius: 20px;
+  background: #ddd;
+  user-select: none;
+}
+
+.day.unlocked {
+  background: #ffb3c6;
+  cursor: pointer;
+}
+
+.day.active {
+  background: #ff4d79;
+  color: white;
+}
+
+.hidden { display: none; }
+
+/* Buttons */
+.choice-btn {
+  padding: 12px 25px;
+  font-size: 1.1em;
+  margin: 10px;
+  border-radius: 30px;
+  border: none;
+  background: #ff4d79;
+  color: white;
+  cursor: pointer;
+}
+
+/* Rose */
+.rose-svg {
+  width: 120px;
+  margin: auto;
+  cursor: pointer;
+}
+
+.petal { fill: #c9184a; }
+.stem { fill: #2d6a4f; }
+.bloom { transform: scale(1.2); }
+
+/* Hug Animation */
+.hug-wrapper {
+  position: relative;
+  height: 120px;
+  margin-bottom: 20px;
+}
+
+.person {
+  position: absolute;
+  font-size: 48px;
+  top: 20px;
+  transition: transform 1.5s ease;
+}
+
+.person.left {
+  left: 10%;
+  animation: moveLeft 3s infinite;
+}
+
+.person.right {
+  right: 10%;
+  animation: moveRight 3s infinite;
+}
+
+@keyframes moveLeft {
+  0% { transform: translateX(0); }
+  40% { transform: translateX(60px); }
+  70% { transform: translateX(60px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes moveRight {
+  0% { transform: translateX(0); }
+  40% { transform: translateX(-60px); }
+  70% { transform: translateX(-60px); }
+  100% { transform: translateX(0); }
+}
+
+/* Fullscreen Heart & Confetti */
+#fullscreen-heart {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 77, 121, 0.95);
+  font-size: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.heart-text {
+  font-size: 1.5rem;
+  color: white;
+}
+
+canvas#confetti-canvas {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 0;
-}
-
-.container {
-  z-index: 10;
-  text-align: center;
-  color: white;
-  padding: 20px;
-}
-
-h1 {
-  font-size: 2.2rem;
-  margin-bottom: 15px;
-}
-
-p {
-  margin-bottom: 25px;
-  font-size: 1.1rem;
-}
-
-button {
-  padding: 14px 30px;
-  font-size: 1.1rem;
-  border: none;
-  border-radius: 30px;
-  cursor: pointer;
-  margin: 10px;
-  transition: transform 0.2s ease;
-}
-
-button:active {
-  transform: scale(0.95);
-}
-
-#enterBtn,
-#proposeBtn {
-  background: white;
-  color: #ff2e63;
-  font-weight: bold;
-}
-
-.choice {
-  color: white;
-}
-
-.yes {
-  background: #00d084;
-}
-
-.always {
-  background: #ffd166;
-  color: #333;
-}
-
-.hidden {
-  display: none;
 }
