@@ -20,10 +20,10 @@ heart.classList.add("hidden");
 
 // Unlock days
 days.forEach(day => {
-  const d = +day.dataset.day;
+  const d = Number(day.dataset.day);
   if (d <= dayNumber) {
     day.classList.add("unlocked");
-    day.onclick = () => loadDay(d);
+    day.addEventListener("click", () => loadDay(d));
   }
   if (d === dayNumber) {
     day.classList.add("active");
@@ -47,20 +47,26 @@ function loadDay(d) {
 }
 
 // Rose click
-document.getElementById("rose").onclick = () => {
-  roseText.classList.remove("hidden");
-};
+const roseEmoji = document.getElementById("rose");
+if (roseEmoji) {
+  roseEmoji.addEventListener("click", () => {
+    roseText.classList.remove("hidden");
+  });
+}
 
-// Propose buttons
-document.getElementById("yesBtn").onclick =
-document.getElementById("alwaysBtn").onclick = () => {
+// Propose buttons (explicit binding)
+document.getElementById("yesBtn").addEventListener("click", showHeart);
+document.getElementById("alwaysBtn").addEventListener("click", showHeart);
+
+function showHeart() {
   heart.classList.remove("hidden");
-};
+}
 
 // Music
-musicBtn.onclick = () => {
+musicBtn.addEventListener("click", () => {
+  music.volume = 0.4;
   music.play();
   musicBtn.innerText = "🎶 Playing";
-};
+});
 
 loadDay(dayNumber);
