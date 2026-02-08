@@ -2,54 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Seven Days, One Love</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Propose Day 💖</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<button id="music-btn">🎵 Play Music</button>
+  <!-- Animation Layer (NON-CLICKABLE) -->
+  <canvas id="effects"></canvas>
 
-<h1>Seven Days, One Love</h1>
-<p class="subtitle">This page blooms a little more every day…</p>
+  <div class="container">
+    <h1 id="title">Will you be mine? 💘</h1>
 
-<div class="timeline">
-  <div class="day" data-day="1">🌹 Rose Day</div>
-  <div class="day" data-day="2">💌 Propose Day</div>
-  <div class="day" data-day="3">🍫 Chocolate Day</div>
-  <div class="day" data-day="4">🧸 Teddy Day</div>
-  <div class="day" data-day="5">🤝 Promise Day</div>
-  <div class="day" data-day="6">😘 Kiss Day</div>
-  <div class="day" data-day="7">❤️ Valentine’s Day</div>
-</div>
+    <button id="proposeBtn">Propose Day 💍</button>
 
-<div id="content"></div>
-
-<!-- Rose Day -->
-<div id="rose-container" class="hidden">
-  <div class="rose-svg" id="rose">
-    🌹
+    <div id="choices" class="hidden">
+      <button class="choice yes" id="yesBtn">Yes 💖</button>
+      <button class="choice always" id="alwaysBtn">Always ♾️</button>
+    </div>
   </div>
-  <p id="rose-text" class="hidden">This rose blooms only for you</p>
-</div>
 
-<!-- Propose Day -->
-<div id="proposal" class="hidden">
-  <h2>Will you be mine? 💌</h2>
-  <button class="choice-btn" id="yesBtn">YES</button>
-  <button class="choice-btn" id="alwaysBtn">ALWAYS</button>
-</div>
-
-<!-- Fullscreen Heart -->
-<div id="fullscreen-heart" class="hidden">
-  ❤️
-  <p class="heart-text">You chose us ❤️</p>
-</div>
-
-<audio id="bg-music" loop>
-  <source src="music.mp3" type="audio/mp3">
-</audio>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
