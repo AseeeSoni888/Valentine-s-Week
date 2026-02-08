@@ -17,18 +17,23 @@ const musicBtn = document.getElementById("music-btn");
 const confettiCanvas = document.getElementById("confetti");
 const ctx = confettiCanvas.getContext("2d");
 
+/* 🔒 HARD FORCE HIDE ON LOAD */
+heart.classList.remove("show");
 heart.classList.add("hidden");
 
 confettiCanvas.width = innerWidth;
 confettiCanvas.height = innerHeight;
 
+/* Timeline */
 days.forEach(day => {
   const d = +day.dataset.day;
+
   if (d <= dayNumber) {
     day.classList.add("unlocked");
     day.addEventListener("click", () => loadDay(d));
     day.addEventListener("touchstart", () => loadDay(d));
   }
+
   if (d === dayNumber) day.classList.add("active");
 });
 
@@ -48,14 +53,14 @@ function loadDay(d) {
   }
 }
 
-/* Music */
+/* 🎵 Music */
 musicBtn.addEventListener("click", () => {
   music.volume = 0.4;
   music.play();
   musicBtn.innerText = "🎶 Playing";
 });
 
-/* Proposal buttons (mobile + desktop) */
+/* 💌 Propose buttons */
 document.querySelectorAll("[data-action='accept']").forEach(btn => {
   btn.addEventListener("click", acceptLove);
   btn.addEventListener("touchstart", acceptLove);
@@ -63,9 +68,11 @@ document.querySelectorAll("[data-action='accept']").forEach(btn => {
 
 function acceptLove() {
   heart.classList.remove("hidden");
+  heart.classList.add("show");
   startConfetti();
 
   setTimeout(() => {
+    heart.classList.remove("show");
     heart.classList.add("hidden");
     stopConfetti();
   }, 3000);
@@ -73,41 +80,36 @@ function acceptLove() {
 
 /* 🎉 Confetti */
 let particles = [];
-let confettiActive = false;
+let active = false;
 
 function startConfetti() {
-  confettiActive = true;
+  active = true;
   particles = Array.from({length: 120}, () => ({
     x: Math.random()*innerWidth,
     y: Math.random()*innerHeight - innerHeight,
     r: Math.random()*6 + 4,
-    d: Math.random()*innerHeight,
-    color: `hsl(${Math.random()*360},100%,70%)`,
-    tilt: Math.random()*10
+    c: `hsl(${Math.random()*360},100%,70%)`
   }));
-  requestAnimationFrame(drawConfetti);
+  draw();
 }
 
 function stopConfetti() {
-  confettiActive = false;
+  active = false;
   ctx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
 }
 
-function drawConfetti() {
-  if (!confettiActive) return;
+function draw() {
+  if (!active) return;
   ctx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
-
   particles.forEach(p => {
     ctx.beginPath();
-    ctx.fillStyle = p.color;
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+    ctx.fillStyle = p.c;
+    ctx.arc(p.x, p.y += 4, p.r, 0, Math.PI*2);
     ctx.fill();
-    p.y += 4;
     if (p.y > innerHeight) p.y = -10;
   });
-
-  requestAnimationFrame(drawConfetti);
+  requestAnimationFrame(draw);
 }
 
-/* Initial load */
+/* Initial render */
 loadDay(dayNumber);
