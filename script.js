@@ -1,9 +1,3 @@
-const startDate = new Date("2026-02-07");
-const today = new Date();
-today.setHours(0,0,0,0);
-
-const dayNumber = Math.min(Math.max(Math.floor((today-startDate)/(1000*60*60*24))+1,1),7);
-
 const days = document.querySelectorAll(".day");
 const content = document.getElementById("content");
 const rose = document.getElementById("rose-container");
@@ -22,7 +16,7 @@ let confettiParticles = [];
 music.volume = 0.4;
 music.play().catch(()=>{}); // browser restrictions may block
 
-// Resize canvas
+// Resize confetti canvas
 function resizeCanvas() {
   confettiCanvas.width = window.innerWidth;
   confettiCanvas.height = window.innerHeight;
@@ -62,20 +56,20 @@ function animateConfetti(){
 
 // Timeline click
 days.forEach(day=>{
-  const d = +day.dataset.day;
-  if(d <= dayNumber){
-    day.classList.add("unlocked");
-    day.addEventListener('click',()=>loadDay(d));
-  }
-  if(d === dayNumber) day.classList.add("active");
+  day.classList.add("unlocked"); // All days clickable
+  day.addEventListener('click',()=>{
+    loadDay(+day.dataset.day);
+  });
 });
 
+// Load specific day
 function loadDay(d){
+  // Reset all sections
   rose.classList.add("hidden");
   proposal.classList.add("hidden");
-  content.innerText = "";
-  hug.classList.add("hidden");
+  hug.classList.remove("show");
   envelope.classList.add("hidden");
+  content.innerText = "";
 
   if(d===1){
     content.innerText="Tap the rose 🌹";
@@ -92,7 +86,7 @@ function loadDay(d){
   if(d===7) content.innerText="Every day with you feels like Valentine’s Day ❤️";
 }
 
-// Button click
+// YES / ALWAYS click
 function handleLove(){
   hug.classList.add("show");
   envelope.classList.remove("hidden");
@@ -108,5 +102,5 @@ function handleLove(){
 yesBtn.addEventListener('click',handleLove);
 alwaysBtn.addEventListener('click',handleLove);
 
-// Initial load
-loadDay(dayNumber);
+// ⚠️ Remove automatic loading of current day
+content.innerText = "Click a day above to start the journey!";
