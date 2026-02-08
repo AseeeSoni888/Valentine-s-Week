@@ -10,9 +10,9 @@ body {
   text-align: center;
 }
 
+/* IMPORTANT: no pointer-events here */
 .hidden {
   display: none !important;
-  pointer-events: none !important;
 }
 
 /* Timeline */
@@ -46,16 +46,24 @@ body {
   margin: 20px auto;
 }
 
+/* Proposal Section */
+#proposal {
+  position: relative;
+  z-index: 5; /* ensures it is on top */
+}
+
 /* Buttons */
 .choice-btn {
-  padding: 12px 30px;
+  padding: 14px 32px;
   font-size: 1.1em;
-  margin: 10px;
+  margin: 12px;
   border-radius: 30px;
   border: none;
   background: #ff4d79;
   color: white;
   cursor: pointer;
+  pointer-events: auto; /* 🔑 force clicks */
+  touch-action: manipulation; /* mobile fix */
 }
 
 /* Fullscreen Heart */
@@ -93,4 +101,5 @@ body {
   color: white;
   padding: 10px 16px;
   border-radius: 20px;
+  cursor: pointer;
 }
