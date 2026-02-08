@@ -1,109 +1,85 @@
 body {
-  margin:0;
-  padding:20px;
+  margin: 0;
+  padding: 20px;
   font-family: Georgia, serif;
   background: linear-gradient(to bottom, #ffe6eb, #ffffff);
-  text-align:center;
+  text-align: center;
+  overflow-x: hidden;
 }
 
-h1 { color:#b3003b; font-size:2rem; }
-.subtitle { color:#555; margin-bottom:20px; font-size:1rem; }
+h1 { color: #b3003b; }
+.subtitle { color: #555; margin-bottom: 20px; }
 
 /* Timeline */
 .timeline {
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-bottom:20px;
-  position:relative;
-  z-index:10;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
 .day {
-  padding:15px 20px;
-  border-radius:25px;
-  background:#ddd;
-  cursor:pointer;
-  user-select:none;
-  font-size:1rem;
-  flex:1 1 auto;
-  min-width:80px;
+  padding: 10px 15px;
+  border-radius: 20px;
+  background: #ddd;
+  cursor: pointer;
+  user-select: none;
 }
 
-.day.unlocked { background:#ffb3c6; }
-.day.active { background:#ff4d79; color:white; }
+.day.unlocked { background: #ffb3c6; color: #6b0022; }
+.day.active { background: #ff4d79; color: #fff; }
 
-/* Content */
-#content { font-size:1.2rem; color:#333; max-width:600px; margin:auto; line-height:1.6; position:relative; z-index:10; }
+/* Hidden sections */
+.hidden { display: none; }
 
 /* Buttons */
 .choice-btn {
-  padding:15px 30px;
-  font-size:1.2rem;
-  margin:10px;
-  border-radius:30px;
-  border:none;
-  background:#ff4d79;
-  color:white;
-  cursor:pointer;
+  padding: 12px 25px;
+  font-size: 1.1em;
+  margin: 10px;
+  border-radius: 30px;
+  border: none;
+  background: #ff4d79;
+  color: white;
+  cursor: pointer;
 }
 
 /* Rose */
-.rose-svg { width:120px; margin:auto; cursor:pointer; }
-.petal { fill:#c9184a; }
-.stem { fill:#2d6a4f; }
-.bloom { transform: scale(1.2); transition: transform 1s; }
-
-/* Hug Animation */
-.hug {
-  position:fixed;
-  inset:0;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:20px;
-  font-size:60px;
-  z-index:9;
-  pointer-events:none;
-  flex-direction:row;
-}
-.hug.show { pointer-events:auto; }
-.person { transition: transform 1s; }
-.hug.show .left { transform: translateX(20px); }
-.hug.show .right { transform: translateX(-20px); }
-.hug-text { font-size:1.5rem; color:#b3003b; position:absolute; top:70%; left:50%; transform:translateX(-50%); }
+.rose-svg { width: 120px; margin: auto; cursor: pointer; }
+.petal { fill: #c9184a; }
+.stem { fill: #2d6a4f; }
+.bloom { transform: scale(1.2); transition: transform 1.2s; }
 
 /* Envelope */
 #envelope {
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  background:white;
-  padding:25px;
-  border-radius:20px;
-  font-size:1.2rem;
-  text-align:center;
-  z-index:11;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255,255,255,0.9);
+  z-index: 999;
 }
 
-/* Confetti canvas */
+.envelope-content {
+  background: #fff0f5;
+  padding: 30px;
+  border-radius: 15px;
+  border: 2px solid #ff4d79;
+  font-size: 1.5rem;
+  color: #b3003b;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+/* Canvas confetti */
 #confetti-canvas {
-  position:fixed;
+  position: fixed;
   top:0;
   left:0;
   width:100%;
   height:100%;
   pointer-events:none;
-  z-index:5;
-}
-
-/* Mobile optimizations */
-@media(max-width:500px){
-  h1{ font-size:1.5rem; }
-  .subtitle{ font-size:0.9rem; }
-  .day{ font-size:0.9rem; padding:10px 15px; min-width:60px; }
-  .choice-btn{ font-size:1rem; padding:12px 20px; }
-  .hug-text{ font-size:1rem; top:65%; }
+  z-index: 998;
 }
