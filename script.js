@@ -6,6 +6,7 @@ const proposal = document.getElementById("proposal");
 const hug = document.getElementById("hug");
 const heart = document.getElementById("fullscreen-heart");
 const heartMsg = document.getElementById("heart-msg");
+const envelope = document.getElementById("envelope");
 const music = document.getElementById("bg-music");
 const musicBtn = document.getElementById("music-btn");
 const yesBtn = document.getElementById("yes-btn");
@@ -67,10 +68,10 @@ days.forEach(day=>{
 });
 
 function loadDay(d){
-  // Hide all
   rose.classList.add("hidden");
   proposal.classList.add("hidden");
   hug.classList.add("hidden");
+  envelope.classList.add("hidden");
   content.innerText = "";
 
   if(d===1){
@@ -84,7 +85,6 @@ function loadDay(d){
   if(d===2){
     content.innerText = "I have something to ask you 💌";
     proposal.classList.remove("hidden");
-    hug.classList.remove("hidden");
   }
   if(d===3) content.innerText = "Life tastes sweeter with you 🍫";
   if(d===4) content.innerText = "I love cuddles 🧸";
@@ -98,12 +98,16 @@ function handleLove(choice){
   heartMsg.innerText = choice==="yes"?"You chose YES ❤️":"You chose ALWAYS ❤️";
   heart.classList.remove("hidden");
   heart.classList.add("pulse-animation");
+  hug.classList.remove("hidden");
   startConfetti();
+  envelope.classList.remove("hidden");
+
   setTimeout(()=>{
     heart.classList.add("hidden");
     heart.classList.remove("pulse-animation");
-    alert("Special message: You are my forever 💖"); // your custom message
-  },3000);
+    hug.classList.add("hidden");
+    envelope.classList.add("hidden");
+  },4000);
 }
 
 yesBtn.onclick = ()=>handleLove("yes");
