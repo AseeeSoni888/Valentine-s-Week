@@ -6,11 +6,14 @@ body {
   text-align: center;
 }
 
+h1 { color: #b3003b; }
+.subtitle { color: #555; margin-bottom: 20px; }
+
 .timeline {
   display: flex;
   justify-content: center;
-  gap: 10px;
   flex-wrap: wrap;
+  gap: 10px;
   margin-bottom: 20px;
 }
 
@@ -18,18 +21,15 @@ body {
   padding: 10px 15px;
   border-radius: 20px;
   background: #ddd;
-  user-select: none;
+  cursor: not-allowed;
 }
 
-.day.unlocked {
-  background: #ffb3c6;
+.day.active, .day.unlocked {
   cursor: pointer;
 }
 
-.day.active {
-  background: #ff4d79;
-  color: white;
-}
+.day.unlocked { background: #ffb3c6; }
+.day.active { background: #ff4d79; color: white; }
 
 .hidden { display: none; }
 
@@ -46,74 +46,45 @@ body {
 }
 
 /* Rose */
-.rose-svg {
-  width: 120px;
-  margin: auto;
-  cursor: pointer;
-}
-
-.petal { fill: #c9184a; }
+.rose-svg { width: 120px; margin: auto; cursor: pointer; }
+.petal { fill: #c9184a; transition: transform 1.5s ease; transform-origin: center; }
 .stem { fill: #2d6a4f; }
 .bloom { transform: scale(1.2); }
+#rose-text.show { opacity: 1; transition: opacity 1.5s ease; }
+.secret.show { opacity: 1; transition: opacity 2s ease; }
 
-/* Hug Animation */
-.hug-wrapper {
-  position: relative;
-  height: 120px;
-  margin-bottom: 20px;
-}
+/* Hug */
+.hug { display: flex; justify-content: center; align-items: center; gap: 10px; margin: 20px 0; }
+.person { font-size: 50px; transition: transform 1s ease; }
+.hug-text { font-size: 1.2em; }
 
-.person {
-  position: absolute;
-  font-size: 48px;
-  top: 20px;
-  transition: transform 1.5s ease;
-}
-
-.person.left {
-  left: 10%;
-  animation: moveLeft 3s infinite;
-}
-
-.person.right {
-  right: 10%;
-  animation: moveRight 3s infinite;
-}
-
-@keyframes moveLeft {
-  0% { transform: translateX(0); }
-  40% { transform: translateX(60px); }
-  70% { transform: translateX(60px); }
-  100% { transform: translateX(0); }
-}
-
-@keyframes moveRight {
-  0% { transform: translateX(0); }
-  40% { transform: translateX(-60px); }
-  70% { transform: translateX(-60px); }
-  100% { transform: translateX(0); }
-}
-
-/* Fullscreen Heart & Confetti */
+/* Heart */
 #fullscreen-heart {
   position: fixed;
   inset: 0;
-  background: rgba(255, 77, 121, 0.95);
+  background: rgba(255,77,121,0.95);
   font-size: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  animation: pulse 1.2s infinite;
   z-index: 999;
-}
-
-.heart-text {
-  font-size: 1.5rem;
-  color: white;
-}
-
-canvas#confetti-canvas {
-  position: fixed;
-  inset: 0;
   pointer-events: none;
 }
+.heart-text { font-size: 1.5rem; color: white; }
+
+/* Confetti */
+#confetti-canvas {
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  pointer-events:none;
+  z-index: 998;
+}
+
+/* Music button */
+#music-btn { padding: 10px 20px; border-radius: 20px; border:none; background:#ff4d79; color:white; cursor:pointer; margin-bottom:10px; }
+
+/* Pulse animation */
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
