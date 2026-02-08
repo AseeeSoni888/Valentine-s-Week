@@ -6,7 +6,6 @@ body {
   text-align: center;
 }
 
-/* Timeline */
 .timeline {
   display: flex;
   justify-content: center;
@@ -19,10 +18,6 @@ body {
   padding: 10px 15px;
   border-radius: 20px;
   background: #ddd;
-}
-
-.day.unlocked {
-  background: #ffb3c6;
   cursor: pointer;
 }
 
@@ -31,12 +26,10 @@ body {
   color: white;
 }
 
-/* Utility */
 .hidden {
-  display: none !important;
+  display: none;
 }
 
-/* Buttons */
 .choice-btn {
   padding: 12px 25px;
   font-size: 1.1em;
@@ -46,10 +39,8 @@ body {
   background: #ff4d79;
   color: white;
   cursor: pointer;
-  touch-action: manipulation;
 }
 
-/* Rose */
 .rose-svg {
   width: 120px;
   margin: auto;
@@ -59,39 +50,7 @@ body {
 .petal { fill: #c9184a; }
 .stem { fill: #2d6a4f; }
 
-/* ❤️ Fullscreen Heart — NO display here */
-#fullscreen-heart {
-  position: fixed;
-  inset: 0;
-  background: rgba(255, 77, 121, 0.95);
-  font-size: 90px;
-  z-index: 999;
-}
-
-/* Visible state (JS-controlled) */
-#fullscreen-heart.show {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  animation: pulse 1.2s infinite;
-}
-
-.heart-text {
-  font-size: 1.4rem;
-  color: white;
-}
-
-/* Confetti */
-#confetti {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 998;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.15); }
-  100% { transform: scale(1); }
+.bloom {
+  transform: scale(1.2);
+  transition: transform 1.2s ease;
 }
