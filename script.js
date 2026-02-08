@@ -39,6 +39,7 @@ function startConfetti() {
     });
   }
   requestAnimationFrame(drawConfetti);
+  setTimeout(() => confettiCanvas.classList.add("hidden"), 3000); // hide after 3s
 }
 
 function drawConfetti(){
@@ -65,13 +66,11 @@ days.forEach(day=>{
 });
 
 function loadDay(d){
-  // Hide all
   rose.classList.add("hidden");
   proposal.classList.add("hidden");
   hug.classList.add("hidden");
   content.innerText = "";
 
-  // Day-specific content
   if(d===1){
     content.innerText = "Tap the rose 🌹";
     rose.classList.remove("hidden");
@@ -94,9 +93,15 @@ function loadDay(d){
 
 // ===== Propose Day Buttons =====
 function handleLove(choice){
-  heart.classList.remove("hidden");
   heartMsg.innerText = choice==="yes"?"You chose YES ❤️":"You chose ALWAYS ❤️";
+  heart.classList.remove("hidden");
+  heart.classList.add("pulse-animation"); // add pulse
   startConfetti();
+  // Hide heart after 3 seconds
+  setTimeout(()=>{
+    heart.classList.add("hidden");
+    heart.classList.remove("pulse-animation");
+  },3000);
 }
 
 yesBtn.onclick = ()=>handleLove("yes");
