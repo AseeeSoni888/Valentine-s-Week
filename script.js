@@ -1,115 +1,106 @@
-// Dates & Days
-const startDate = new Date("2026-02-07");
-const today = new Date();
-today.setHours(0,0,0,0);
-
-const dayNumber = Math.min(
-  Math.max(Math.floor((today - startDate)/(1000*60*60*24))+1,1),
-  7
-);
-
+// ===== Elements =====
 const days = document.querySelectorAll(".day");
 const content = document.getElementById("content");
 const rose = document.getElementById("rose-container");
-const propose = document.getElementById("propose");
+const proposal = document.getElementById("proposal");
+const hug = document.getElementById("hug");
 const heart = document.getElementById("fullscreen-heart");
 const heartMsg = document.getElementById("heart-msg");
 const music = document.getElementById("bg-music");
 const musicBtn = document.getElementById("music-btn");
+const yesBtn = document.getElementById("yes-btn");
+const alwaysBtn = document.getElementById("always-btn");
 const confettiCanvas = document.getElementById("confetti-canvas");
+const ctx = confettiCanvas.getContext('2d');
 
-// Timeline Clicks
-days.forEach(day => {
-  const d = +day.dataset.day;
-  if(d <= dayNumber){
-    day.classList.add("unlocked");
-    day.onclick = () => loadDay(d);
-  }
-  if(d === dayNumber) day.classList.add("active");
-});
-
-// Load Day
-function loadDay(d){
-  rose.classList.add("hidden");
-  propose.classList.add("hidden");
-  content.innerText = "";
-
-  if(d === 1){
-    content.innerText = "Tap the rose 🌹";
-    rose.classList.remove("hidden");
-  }
-
-  if(d === 2){
-    content.innerText = "I have something to ask you 💌";
-    propose.classList.remove("hidden");
-  }
-
-  if(d === 7){
-    content.innerText = "This day belongs to us ❤️";
-  }
-}
-
-// Propose Day Buttons
-document.querySelectorAll("#propose .choice-btn").forEach(btn=>{
-  btn.addEventListener("click", ()=>{
-    heartMsg.innerText = `You chose "${btn.dataset.answer}" 💖`;
-    heart.classList.remove("hidden");
-    startConfetti();
-  });
-});
-
-// Music
-musicBtn.onclick = ()=>{
+// ===== Music Button =====
+musicBtn.onclick = () => {
   music.volume = 0.4;
   music.play();
   musicBtn.innerText = "🎶 Playing";
 };
 
-// Confetti
-function startConfetti(){
-  const ctx = confettiCanvas.getContext("2d");
+// ===== Confetti =====
+let confettiParticles = [];
+function startConfetti() {
+  confettiCanvas.classList.remove("hidden");
   confettiCanvas.width = window.innerWidth;
   confettiCanvas.height = window.innerHeight;
 
-  const confetti = [];
-  const colors = ["#ff4d79","#ffb3c6","#fff"];
-
+  confettiParticles = [];
   for(let i=0;i<150;i++){
-    confetti.push({
-      x: Math.random()*confettiCanvas.width,
-      y: Math.random()*confettiCanvas.height - confettiCanvas.height,
-      r: Math.random()*6 + 4,
-      d: Math.random()*150,
-      color: colors[Math.floor(Math.random()*colors.length)],
-      tilt: Math.random()*10 - 10,
-      tiltAngleIncrement: Math.random()*0.07 + 0.05
+    confettiParticles.push({
+      x: Math.random()*window.innerWidth,
+      y: Math.random()*window.innerHeight,
+      r: Math.random()*6+2,
+      d: Math.random()*30+10,
+      color: `hsl(${Math.random()*360},70%,60%)`,
+      tilt: Math.random()*10-10
     });
   }
-
-  function draw(){
-    ctx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
-    confetti.forEach((c,i)=>{
-      ctx.beginPath();
-      ctx.lineWidth = c.r;
-      ctx.strokeStyle = c.color;
-      ctx.moveTo(c.x + c.tilt + c.r/2, c.y);
-      ctx.lineTo(c.x + c.tilt, c.y + c.tilt + c.r/2);
-      ctx.stroke();
-
-      c.tiltAngle += c.tiltAngleIncrement;
-      c.y += (Math.cos(c.d) + 3 + c.r/2)/2;
-      c.tilt = Math.sin(c.tiltAngle) * 12;
-
-      if(c.y > confettiCanvas.height){
-        c.y = -10;
-        c.x = Math.random()*confettiCanvas.width;
-      }
-    });
-    requestAnimationFrame(draw);
-  }
-
-  draw();
+  requestAnimationFrame(drawConfetti);
 }
 
-// Initial load
-loadDay(dayNumber);
+function drawConfetti(){
+  ctx.clearRect(0,0,confettiCanvas.width, confettiCanvas.height);
+  confettiParticles.forEach(p => {
+    ctx.fillStyle = p.color;
+    ctx.beginPath();
+    ctx.moveTo(p.x+ p.tilt, p.y);
+    ctx.lineTo(p.x + p.tilt + 5, p.y + p.r);
+    ctx.lineTo(p.x + p.tilt -5, p.y + p.r);
+    ctx.closePath();
+    ctx.fill();
+    p.y += Math.sin(Math.PI/180)*2 +1;
+    p.x += Math.sin(Math.PI/180)*1;
+    if(p.y>window.innerHeight){p.y=-10;p.x=Math.random()*window.innerWidth;}
+  });
+  requestAnimationFrame(drawConfetti);
+}
+
+// ===== Day Handling =====
+days.forEach(day=>{
+  const d = +day.dataset.day;
+  day.onclick = ()=>loadDay(d);
+});
+
+function loadDay(d){
+  // Hide all
+  rose.classList.add("hidden");
+  proposal.classList.add("hidden");
+  hug.classList.add("hidden");
+  content.innerText = "";
+
+  // Day-specific content
+  if(d===1){
+    content.innerText = "Tap the rose 🌹";
+    rose.classList.remove("hidden");
+    rose.onclick = ()=>{
+      rose.classList.add("bloom");
+      document.getElementById("rose-text").classList.add("show");
+    }
+  }
+  if(d===2){
+    content.innerText = "I have something to ask you 💌";
+    proposal.classList.remove("hidden");
+    hug.classList.remove("hidden");
+  }
+  if(d===3) content.innerText = "Life tastes sweeter with you 🍫";
+  if(d===4) content.innerText = "I love cuddles 🧸";
+  if(d===5) content.innerText = "Promises are forever 🤝";
+  if(d===6) content.innerText = "Some feelings don’t need words 😘";
+  if(d===7) content.innerText = "Happy Valentine’s Day ❤️";
+}
+
+// ===== Propose Day Buttons =====
+function handleLove(choice){
+  heart.classList.remove("hidden");
+  heartMsg.innerText = choice==="yes"?"You chose YES ❤️":"You chose ALWAYS ❤️";
+  startConfetti();
+}
+
+yesBtn.onclick = ()=>handleLove("yes");
+alwaysBtn.onclick = ()=>handleLove("always");
+
+// ===== Initial Load =====
+loadDay(1);
