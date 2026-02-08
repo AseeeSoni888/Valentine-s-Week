@@ -1,4 +1,3 @@
-/* ========== GLOBAL RESET ========== */
 * {
   box-sizing: border-box;
 }
@@ -9,53 +8,31 @@ body {
   font-family: Georgia, serif;
   background: linear-gradient(to bottom, #ffe6eb, #ffffff);
   text-align: center;
-  overflow-x: hidden;
 }
 
-/* ========== HEADINGS ========== */
-h1 {
-  color: #b3003b;
-}
-
-.subtitle {
-  color: #555;
-  margin-bottom: 30px;
-}
-
-/* ========== HIDDEN (CRITICAL FIX) ========== */
 .hidden {
   display: none !important;
-  visibility: hidden !important;
   pointer-events: none !important;
 }
 
-/* ========== TIMELINE ========== */
+/* Timeline */
 .timeline {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 30px;
-  z-index: 10;
-  position: relative;
+  margin-bottom: 20px;
 }
 
 .day {
   padding: 10px 16px;
   border-radius: 20px;
   background: #ddd;
-  color: #777;
-  font-size: 0.9em;
-  user-select: none;
   cursor: pointer;
-  pointer-events: auto;
-  touch-action: manipulation;
-  transition: all 0.3s ease;
 }
 
 .day.unlocked {
   background: #ffb3c6;
-  color: #6b0022;
 }
 
 .day.active {
@@ -63,71 +40,15 @@ h1 {
   color: white;
 }
 
-/* ========== CONTENT ========== */
+/* Content */
 #content {
   font-size: 1.2em;
-  color: #333;
-  max-width: 600px;
   margin: 20px auto;
-  line-height: 1.6;
 }
 
-/* ========== MUSIC BUTTON ========== */
-#music-btn {
-  position: fixed;
-  top: 15px;
-  right: 15px;
-  background: #ff4d79;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 25px;
-  cursor: pointer;
-  z-index: 50;
-}
-
-/* ========== ROSE DAY ========== */
-#rose-container {
-  margin-top: 30px;
-}
-
-.rose-svg {
-  width: 120px;
-  margin: auto;
-  cursor: pointer;
-  transition: transform 1.5s ease;
-}
-
-.petal {
-  fill: #c9184a;
-  transform-origin: center;
-}
-
-.stem {
-  fill: #2d6a4f;
-}
-
-.bloom {
-  transform: scale(1.2);
-}
-
-#rose-text {
-  margin-top: 15px;
-  color: #b3003b;
-}
-
-.secret {
-  margin-top: 20px;
-  color: #6b0022;
-}
-
-/* ========== PROPOSE DAY ========== */
-#proposal {
-  margin-top: 40px;
-}
-
+/* Buttons */
 .choice-btn {
-  padding: 12px 28px;
+  padding: 12px 30px;
   font-size: 1.1em;
   margin: 10px;
   border-radius: 30px;
@@ -137,7 +58,7 @@ h1 {
   cursor: pointer;
 }
 
-/* ========== FULLSCREEN HEART ========== */
+/* Fullscreen Heart */
 #fullscreen-heart {
   position: fixed;
   inset: 0;
@@ -146,38 +67,30 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-size: 110px;
-  z-index: 999;
+  font-size: 100px;
   animation: pulse 1.2s infinite;
-  pointer-events: auto;
+  z-index: 999;
 }
 
 .heart-text {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   color: white;
-  margin-top: 15px;
 }
 
-/* ========== HEART PULSE ========== */
 @keyframes pulse {
   0% { transform: scale(1); }
   50% { transform: scale(1.15); }
   100% { transform: scale(1); }
 }
 
-/* ========== CONFETTI ========== */
-.confetti {
+/* Music */
+#music-btn {
   position: fixed;
-  top: -20px;
-  font-size: 18px;
-  animation: fall linear forwards;
-  z-index: 998;
-  pointer-events: none;
-}
-
-@keyframes fall {
-  to {
-    transform: translateY(110vh) rotate(720deg);
-    opacity: 0;
-  }
+  top: 15px;
+  right: 15px;
+  border: none;
+  background: #ff4d79;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 20px;
 }
