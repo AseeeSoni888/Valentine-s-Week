@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Seven Days, One Love</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
@@ -28,22 +28,22 @@
 <!-- Rose Day -->
 <div id="rose-container" class="hidden">
   <div class="rose-svg" id="rose">
-    <svg viewBox="0 0 200 200">
-      <circle cx="100" cy="80" r="25" class="petal"/>
-      <circle cx="85" cy="95" r="25" class="petal"/>
-      <circle cx="115" cy="95" r="25" class="petal"/>
-      <circle cx="100" cy="110" r="25" class="petal"/>
-      <rect x="95" y="120" width="10" height="50" class="stem"/>
-    </svg>
+    🌹
   </div>
-  <p id="rose-text">This rose blooms only for you 🌹</p>
+  <p id="rose-text" class="hidden">This rose blooms only for you</p>
 </div>
 
 <!-- Propose Day -->
 <div id="proposal" class="hidden">
   <h2>Will you be mine? 💌</h2>
-  <button class="choice-btn" id="yes-btn">YES</button>
-  <button class="choice-btn" id="always-btn">ALWAYS</button>
+  <button class="choice-btn" id="yesBtn">YES</button>
+  <button class="choice-btn" id="alwaysBtn">ALWAYS</button>
+</div>
+
+<!-- Fullscreen Heart -->
+<div id="fullscreen-heart" class="hidden">
+  ❤️
+  <p class="heart-text">You chose us ❤️</p>
 </div>
 
 <audio id="bg-music" loop>
