@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Seven Days, One Love</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
@@ -12,8 +12,8 @@
   <p class="subtitle">This page blooms a little more every day…</p>
 
   <div class="timeline">
-    <div class="day active" data-day="1">🌹 Rose Day</div>
-    <div class="day" data-day="2">💌 Propose Day</div>
+    <div class="day" data-day="1">🌹 Rose Day</div>
+    <div class="day" data-day="2">💍 Propose Day</div>
     <div class="day" data-day="3">🍫 Chocolate Day</div>
     <div class="day" data-day="4">🧸 Teddy Day</div>
     <div class="day" data-day="5">🤝 Promise Day</div>
@@ -21,46 +21,50 @@
     <div class="day" data-day="7">❤️ Valentine’s Day</div>
   </div>
 
-  <!-- Rose Animation Section -->
+  <div id="content"></div>
+
+  <!-- 💍 Propose Buttons -->
+  <div id="proposal-actions" class="hidden">
+    <button id="yes-btn">Yes ❤️</button>
+    <button id="always-btn">Always 💍</button>
+  </div>
+
+  <p id="proposal-response" class="hidden"></p>
+
+  <!-- 🌹 Rose Section -->
   <div id="rose-container" class="hidden">
     <div class="rose-svg">
       <svg viewBox="0 0 200 200">
-        <g id="rose">
-          <circle cx="100" cy="80" r="25" class="petal"/>
-          <circle cx="85" cy="95" r="25" class="petal"/>
-          <circle cx="115" cy="95" r="25" class="petal"/>
-          <circle cx="100" cy="110" r="25" class="petal"/>
-        </g>
+        <circle cx="100" cy="80" r="25" class="petal"/>
+        <circle cx="85" cy="95" r="25" class="petal"/>
+        <circle cx="115" cy="95" r="25" class="petal"/>
+        <circle cx="100" cy="110" r="25" class="petal"/>
         <rect x="95" y="120" width="10" height="50" class="stem"/>
       </svg>
     </div>
 
     <p id="rose-text"></p>
 
-    <p id="secret" class="secret">
-      Happy Rose Day, my Strawberry 🌹
-
-If I had to give you a rose, it wouldn’t be the delicate kind that wilts at the first sign of pressure. It would be the kind that grows stubbornly — thorns and all — soft petals wrapped around an unshakeable core. Beautiful, sharp when needed, and impossible to ignore… just like you.
-
-You carry passion and fire, but also care so deeply it sometimes overwhelms you. You love fiercely, think intensely, dream boldly, and still show up — for your writing, your future, and for us. That combination? Rare. Dangerous. Addictive.
-
-I love how you tease with confidence, flirt with intention, boss me around like you own the place, and still let your softer side peek through when you trust. I love how your mind works, how your presence lingers, how even your absence feels loud to me.
-
-So here’s my rose for you — not just for today, but for every day you choose to be exactly who you are.
-Strong. Emotional. Brilliant. Mine to admire, and mine to choose… again and again.
-
-🌹
+    <p id="secret" class="secret hidden">
+      There’s something I don’t say often…  
+      You make me feel safe being myself 🤍
     </p>
   </div>
 
-  <div id="content"></div>
-
-  <!-- Floating Petals -->
   <div id="petals"></div>
 
-  <!-- Background Music -->
+  <!-- ❤️ Valentine Finale -->
+  <div id="valentine-overlay" class="hidden">
+    <div class="valentine-heart">❤️</div>
+    <p class="valentine-text">
+      This page ends here.<br />
+      But my love for you doesn’t.
+    </p>
+  </div>
+
+  <!-- 🎵 Music -->
   <audio id="bg-music" loop>
-    <source src="music.mp3" type="audio/mp3">
+    <source src="music.mp3" type="audio/mp3" />
   </audio>
 
   <script src="script.js"></script>
