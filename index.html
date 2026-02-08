@@ -8,7 +8,6 @@
 </head>
 <body>
 
-  <!-- Music -->
   <audio id="bg-music" loop>
     <source src="music.mp3" type="audio/mp3">
   </audio>
@@ -16,7 +15,6 @@
   <h1>Seven Days, One Love</h1>
   <p class="subtitle">This page blooms a little more every day…</p>
 
-  <!-- Timeline -->
   <div class="timeline">
     <div class="day" data-day="1">🌹 Rose Day</div>
     <div class="day" data-day="2">💌 Propose Day</div>
@@ -27,31 +25,30 @@
     <div class="day" data-day="7">❤️ Valentine’s Day</div>
   </div>
 
-  <!-- Dynamic Content -->
-  <div id="content"></div>
+  <!-- CONTENT STAGE -->
+  <div id="stage">
+    <p id="content"></p>
 
-  <!-- Rose Day -->
-  <div id="rose-container" class="hidden">
-    <div class="rose-svg">
-      <svg viewBox="0 0 200 200">
-        <circle cx="100" cy="80" r="25" class="petal"/>
-        <circle cx="85" cy="95" r="25" class="petal"/>
-        <circle cx="115" cy="95" r="25" class="petal"/>
-        <circle cx="100" cy="110" r="25" class="petal"/>
-        <rect x="95" y="120" width="10" height="50" class="stem"/>
-      </svg>
+    <div id="rose-container" class="hidden">
+      <div class="rose-svg">
+        <svg viewBox="0 0 200 200">
+          <circle cx="100" cy="80" r="25" class="petal"/>
+          <circle cx="85" cy="95" r="25" class="petal"/>
+          <circle cx="115" cy="95" r="25" class="petal"/>
+          <circle cx="100" cy="110" r="25" class="petal"/>
+          <rect x="95" y="120" width="10" height="50" class="stem"/>
+        </svg>
+      </div>
+      <p>This rose blooms only for you 🌹</p>
     </div>
-    <p id="rose-text">This rose blooms only for you 🌹</p>
+
+    <div id="proposal" class="hidden">
+      <h2>Will you be mine? 💌</h2>
+      <button id="yes-btn" class="choice-btn">YES</button>
+      <button id="always-btn" class="choice-btn">ALWAYS</button>
+    </div>
   </div>
 
-  <!-- Propose Day -->
-  <div id="proposal" class="hidden">
-    <h2>Will you be mine? 💌</h2>
-    <button id="yes-btn" class="choice-btn">YES</button>
-    <button id="always-btn" class="choice-btn">ALWAYS</button>
-  </div>
-
-  <!-- Envelope + confetti -->
   <div id="envelope" class="hidden">
     <div class="envelope-content">
       <p>You're my forever ❤️</p>
