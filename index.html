@@ -36,15 +36,14 @@
         <rect x="95" y="120" width="10" height="50" class="stem"/>
       </svg>
     </div>
-    <p id="rose-text">This rose blooms only for you 🌹</p>
-    <p id="secret" class="secret">You make me feel safe being myself 🤍</p>
+    <p>This rose blooms only for you 🌹</p>
   </div>
 
   <!-- Propose Day -->
   <div id="proposal" class="hidden">
     <h2>Will you be mine? 💌</h2>
-    <button class="choice-btn" onclick="acceptLove()">YES</button>
-    <button class="choice-btn" onclick="acceptLove()">ALWAYS</button>
+    <button class="choice-btn" data-action="accept">YES</button>
+    <button class="choice-btn" data-action="accept">ALWAYS</button>
   </div>
 
   <!-- Fullscreen Heart -->
@@ -52,6 +51,9 @@
     ❤️
     <p class="heart-text">You chose us ❤️</p>
   </div>
+
+  <!-- Confetti -->
+  <canvas id="confetti"></canvas>
 
   <audio id="bg-music" loop>
     <source src="music.mp3" type="audio/mp3">
