@@ -1,88 +1,73 @@
-const days = document.querySelectorAll(".day");
-const content = document.getElementById("content");
-const roseContainer = document.getElementById("rose-container");
-const proposal = document.getElementById("proposal");
-const rose = document.getElementById("rose");
-const music = document.getElementById("bg-music");
-const musicBtn = document.getElementById("music-btn");
+const startDate = new Date("2026-02-07");
+const today = new Date();
+today.setHours(0,0,0,0);
 
-// Make all days clickable
+const dayNumber = Math.min(
+  Math.max(Math.floor((today - startDate)/(1000*60*60*24))+1,1),
+  7
+);
+
+const days = document.querySelectorAll(".day");
+const rose = document.getElementById("rose-container");
+const proposal = document.getElementById("proposal");
+const content = document.getElementById("content");
+
+// Unlock days
 days.forEach(day => {
   const d = +day.dataset.day;
 
-  day.addEventListener("click", () => loadDay(d));
-  day.addEventListener("touchstart", () => loadDay(d), { passive: true });
-});
-
-function reset() {
-  content.innerText = "";
-  roseContainer.classList.add("hidden");
-  proposal.classList.add("hidden");
-
-  days.forEach(d => d.classList.remove("active"));
-}
-
-function loadDay(day) {
-  reset();
-  document.querySelector(`.day[data-day="${day}"]`).classList.add("active");
-
-  if (day === 1) {
-    content.innerText = "Tap the rose 🌹";
-    roseContainer.classList.remove("hidden");
+  if (d <= dayNumber) {
+    day.classList.add("unlocked");
+    day.onclick = () => loadDay(d);
   }
 
-  if (day === 2) {
-    content.innerText = "I have something important to ask you 💌";
+  if (d === dayNumber) {
+    day.classList.add("active");
+  }
+});
+
+function loadDay(d) {
+  rose.classList.add("hidden");
+  proposal.classList.add("hidden");
+  content.innerText = "";
+
+  if (d === 1) {
+    content.innerText = "Tap the rose 🌹";
+    rose.classList.remove("hidden");
+  }
+
+  if (d === 2) {
+    content.innerText = "I have something to ask you 💌";
     proposal.classList.remove("hidden");
   }
-
-  if (day === 7) {
-    content.innerText = "This day belongs to us ❤️";
-  }
 }
 
-// Rose bloom
-rose.addEventListener("click", () => {
-  rose.classList.add("bloom");
-});
-
-// 🎉 CONFETTI FUNCTION
-function launchConfetti() {
-  for (let i = 0; i < 80; i++) {
-    const confetti = document.createElement("div");
-    confetti.className = "confetti";
-    confetti.style.left = Math.random() * 100 + "vw";
-    confetti.style.background =
-      ["#ff4d79", "#ffd6e0", "#fff", "#ff99ac"][Math.floor(Math.random() * 4)];
-    confetti.style.animationDuration = 2 + Math.random() * 2 + "s";
-    document.body.appendChild(confetti);
-
-    setTimeout(() => confetti.remove(), 4000);
-  }
+// 💖 YES / ALWAYS
+function acceptLove() {
+  showHeart();
+  launchConfetti();
 }
 
-// ❤️ HEART OVERLAY
-function showLove() {
+function showHeart() {
   const overlay = document.createElement("div");
   overlay.id = "love-overlay";
-  overlay.innerHTML = `❤️<p>You chose us ❤️</p>`;
+  overlay.innerHTML = `<span>❤️</span><p>You chose us</p>`;
   document.body.appendChild(overlay);
 
-  launchConfetti();
-
-  setTimeout(() => overlay.remove(), 3500);
+  setTimeout(() => overlay.remove(), 3000);
 }
 
-// Proposal buttons
-document.getElementById("yes-btn").onclick = showLove;
-document.getElementById("always-btn").onclick = showLove;
+function launchConfetti() {
+  for (let i = 0; i < 60; i++) {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.background = `hsl(${Math.random()*360},100%,70%)`;
+    c.style.animationDuration = 2 + Math.random() * 2 + "s";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 4000);
+  }
+}
 
-// Music (user gesture safe)
-musicBtn.onclick = () => {
-  music.volume = 0.4;
-  music.play();
-  musicBtn.innerText = "🎶 Playing";
-};
-
-// Load Rose Day initially
-loadDay(1);
+// Initial load
+loadDay(dayNumber);
