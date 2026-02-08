@@ -15,7 +15,7 @@ const ctx = confettiCanvas.getContext('2d');
 
 // ===== Auto-play music =====
 music.volume = 0.4;
-music.play().catch(()=>{}); // in case browser blocks autoplay
+music.play().catch(()=>{}); // fallback in case browser blocks autoplay
 
 // ===== Confetti =====
 let confettiParticles = [];
@@ -58,16 +58,22 @@ function drawConfetti(){
 
 // ===== Day Handling =====
 days.forEach(day=>{
-  const d = +day.dataset.day;
   day.classList.add("unlocked");
-  day.onclick = ()=>loadDay(d);
+  day.onclick = ()=>{
+    const d = +day.dataset.day;
+    loadDay(d);
+  }
 });
 
+// ===== Load Day Function =====
 function loadDay(d){
+  // Hide all special elements
   rose.classList.add("hidden");
   proposal.classList.add("hidden");
   hug.classList.add("hidden");
   envelope.classList.add("hidden");
+  heart.classList.add("hidden");
+  heart.classList.remove("pulse-animation");
   content.innerText = "";
 
   if(d===1){
@@ -91,7 +97,7 @@ function loadDay(d){
 
 // ===== Propose Day Buttons =====
 function handleLove(choice){
-  heartMsg.innerText = choice==="yes"?"You chose YES ❤️":"You chose ALWAYS ❤️";
+  heartMsg.innerText = "You're my forever 💖";
   heart.classList.remove("hidden");
   heart.classList.add("pulse-animation");
   hug.classList.remove("hidden");
@@ -111,4 +117,5 @@ yesBtn.onclick = ()=>handleLove("yes");
 alwaysBtn.onclick = ()=>handleLove("always");
 
 // ===== Initial Load =====
+// Start at Day 1 always
 loadDay(1);
