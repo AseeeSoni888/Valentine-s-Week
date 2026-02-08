@@ -39,22 +39,22 @@ function startConfetti() {
     });
   }
   requestAnimationFrame(drawConfetti);
-  setTimeout(() => confettiCanvas.classList.add("hidden"), 3000); // hide after 3s
+  setTimeout(()=>confettiCanvas.classList.add("hidden"),3000);
 }
 
 function drawConfetti(){
   ctx.clearRect(0,0,confettiCanvas.width, confettiCanvas.height);
-  confettiParticles.forEach(p => {
+  confettiParticles.forEach(p=>{
     ctx.fillStyle = p.color;
     ctx.beginPath();
-    ctx.moveTo(p.x+ p.tilt, p.y);
+    ctx.moveTo(p.x + p.tilt, p.y);
     ctx.lineTo(p.x + p.tilt + 5, p.y + p.r);
     ctx.lineTo(p.x + p.tilt -5, p.y + p.r);
     ctx.closePath();
     ctx.fill();
     p.y += Math.sin(Math.PI/180)*2 +1;
     p.x += Math.sin(Math.PI/180)*1;
-    if(p.y>window.innerHeight){p.y=-10;p.x=Math.random()*window.innerWidth;}
+    if(p.y>window.innerHeight){p.y=-10; p.x=Math.random()*window.innerWidth;}
   });
   requestAnimationFrame(drawConfetti);
 }
@@ -62,10 +62,12 @@ function drawConfetti(){
 // ===== Day Handling =====
 days.forEach(day=>{
   const d = +day.dataset.day;
+  day.classList.add("unlocked");
   day.onclick = ()=>loadDay(d);
 });
 
 function loadDay(d){
+  // Hide all
   rose.classList.add("hidden");
   proposal.classList.add("hidden");
   hug.classList.add("hidden");
@@ -95,12 +97,12 @@ function loadDay(d){
 function handleLove(choice){
   heartMsg.innerText = choice==="yes"?"You chose YES ❤️":"You chose ALWAYS ❤️";
   heart.classList.remove("hidden");
-  heart.classList.add("pulse-animation"); // add pulse
+  heart.classList.add("pulse-animation");
   startConfetti();
-  // Hide heart after 3 seconds
   setTimeout(()=>{
     heart.classList.add("hidden");
     heart.classList.remove("pulse-animation");
+    alert("Special message: You are my forever 💖"); // your custom message
   },3000);
 }
 
