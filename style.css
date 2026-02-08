@@ -1,56 +1,207 @@
-body {
+* {
   margin: 0;
-  padding: 20px;
-  font-family: Georgia, serif;
-  background: linear-gradient(to bottom, #ffe6eb, #ffffff);
-  text-align: center;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-.timeline {
+body {
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  min-height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+/* Main Card */
+.card {
+  background: white;
+  width: 90%;
+  max-width: 420px;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Title */
+h1 {
+  color: #ff4d79;
+  margin-bottom: 15px;
+}
+
+/* Valentine Week Days */
+.days {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .day {
-  padding: 10px 15px;
-  border-radius: 20px;
-  background: #ddd;
+  background: #ffe0e8;
+  padding: 10px;
+  border-radius: 10px;
   cursor: pointer;
+  font-size: 14px;
+  transition: 0.3s;
+  user-select: none;
+}
+
+.day:hover {
+  background: #ffb6c9;
 }
 
 .day.active {
   background: #ff4d79;
   color: white;
+  font-weight: 600;
 }
 
+/* Content Text */
+#content {
+  margin: 15px 0;
+  font-size: 16px;
+  color: #444;
+}
+
+/* Hidden Utility */
 .hidden {
   display: none;
 }
 
-.choice-btn {
-  padding: 12px 25px;
-  font-size: 1.1em;
-  margin: 10px;
-  border-radius: 30px;
+/* Rose */
+#rose-container {
+  margin-top: 10px;
+}
+
+#rose {
+  font-size: 50px;
+  cursor: pointer;
+  transition: transform 0.5s;
+}
+
+#rose.bloom {
+  transform: scale(1.3) rotate(10deg);
+}
+
+/* Proposal Section */
+#proposal {
+  margin-top: 20px;
+}
+
+#proposal p {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #ff4d79;
+  font-weight: 600;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 15px;
   border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#yes-btn {
   background: #ff4d79;
   color: white;
-  cursor: pointer;
 }
 
-.rose-svg {
-  width: 120px;
-  margin: auto;
-  cursor: pointer;
+#always-btn {
+  background: #ff99ac;
+  color: white;
 }
 
-.petal { fill: #c9184a; }
-.stem { fill: #2d6a4f; }
+button:hover {
+  transform: scale(1.05);
+}
 
-.bloom {
-  transform: scale(1.2);
-  transition: transform 1.2s ease;
+/* Music Button */
+#music-btn {
+  margin-top: 15px;
+  background: #ffd6e0;
+  color: #ff4d79;
+}
+
+/* ❤️ FULLSCREEN HEART OVERLAY (ONLY ON CLICK) */
+#love-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 77, 121, 0.95);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 120px;
+  animation: pulse 1.2s infinite;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+#love-overlay p {
+  font-size: 1.6rem;
+  color: white;
+  margin-top: 20px;
+}
+
+/* 🎉 Confetti */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  animation: fall linear forwards;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* ❤️ Pulse Animation */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Mobile Optimization */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 22px;
+  }
+
+  .day {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
 }
