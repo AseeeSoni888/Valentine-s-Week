@@ -1,115 +1,77 @@
-const startDate = new Date("2026-02-07");
-const today = new Date();
-today.setHours(0,0,0,0);
-
-const dayNumber = Math.min(
-  Math.max(Math.floor((today - startDate)/(1000*60*60*24))+1,1),
-  7
-);
-
 const days = document.querySelectorAll(".day");
 const content = document.getElementById("content");
-const rose = document.getElementById("rose-container");
+
+const roseContainer = document.getElementById("rose-container");
+const rose = document.getElementById("rose");
+const roseText = document.getElementById("rose-text");
+const secret = document.getElementById("secret");
+
 const proposal = document.getElementById("proposal");
 const heart = document.getElementById("fullscreen-heart");
+
 const music = document.getElementById("bg-music");
 const musicBtn = document.getElementById("music-btn");
-const confettiCanvas = document.getElementById("confetti");
-const ctx = confettiCanvas.getContext("2d");
 
-/* 🔒 HARD FORCE HIDE ON LOAD */
-heart.classList.remove("show");
+// Prevent auto hijack
 heart.classList.add("hidden");
 
-confettiCanvas.width = innerWidth;
-confettiCanvas.height = innerHeight;
-
-/* Timeline */
+// Timeline click (ALL days clickable)
 days.forEach(day => {
-  const d = +day.dataset.day;
-
-  if (d <= dayNumber) {
-    day.classList.add("unlocked");
-    day.addEventListener("click", () => loadDay(d));
-    day.addEventListener("touchstart", () => loadDay(d));
-  }
-
-  if (d === dayNumber) day.classList.add("active");
+  day.addEventListener("click", () => loadDay(+day.dataset.day));
+  day.addEventListener("touchstart", () => loadDay(+day.dataset.day), { passive: true });
 });
 
-function loadDay(d) {
-  rose.classList.add("hidden");
+function loadDay(day) {
+  // Reset
+  roseContainer.classList.add("hidden");
   proposal.classList.add("hidden");
+  heart.classList.add("hidden");
   content.innerText = "";
 
-  if (d === 1) {
+  days.forEach(d => d.classList.remove("active"));
+  document.querySelector(`[data-day="${day}"]`).classList.add("active");
+
+  if (day === 1) {
     content.innerText = "Tap the rose 🌹";
-    rose.classList.remove("hidden");
+    roseContainer.classList.remove("hidden");
   }
 
-  if (d === 2) {
-    content.innerText = "I have something to ask you 💌";
+  if (day === 2) {
+    content.innerText = "I have something important to ask you 💌";
     proposal.classList.remove("hidden");
   }
 }
 
-/* 🎵 Music */
-musicBtn.addEventListener("click", () => {
+// Rose animation
+rose.addEventListener("click", () => {
+  rose.classList.add("bloom");
+  roseText.classList.remove("hidden");
+  secret.classList.remove("hidden");
+});
+
+// Proposal buttons
+document.getElementById("yes-btn").onclick =
+document.getElementById("always-btn").onclick = () => {
+  heart.classList.remove("hidden");
+  launchConfetti();
+};
+
+// Confetti
+function launchConfetti() {
+  for (let i = 0; i < 30; i++) {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.innerText = "🎉";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.animationDuration = 2 + Math.random() * 3 + "s";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 4000);
+  }
+}
+
+// Music (user gesture)
+musicBtn.onclick = () => {
   music.volume = 0.4;
   music.play();
   musicBtn.innerText = "🎶 Playing";
-});
-
-/* 💌 Propose buttons */
-document.querySelectorAll("[data-action='accept']").forEach(btn => {
-  btn.addEventListener("click", acceptLove);
-  btn.addEventListener("touchstart", acceptLove);
-});
-
-function acceptLove() {
-  heart.classList.remove("hidden");
-  heart.classList.add("show");
-  startConfetti();
-
-  setTimeout(() => {
-    heart.classList.remove("show");
-    heart.classList.add("hidden");
-    stopConfetti();
-  }, 3000);
-}
-
-/* 🎉 Confetti */
-let particles = [];
-let active = false;
-
-function startConfetti() {
-  active = true;
-  particles = Array.from({length: 120}, () => ({
-    x: Math.random()*innerWidth,
-    y: Math.random()*innerHeight - innerHeight,
-    r: Math.random()*6 + 4,
-    c: `hsl(${Math.random()*360},100%,70%)`
-  }));
-  draw();
-}
-
-function stopConfetti() {
-  active = false;
-  ctx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
-}
-
-function draw() {
-  if (!active) return;
-  ctx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
-  particles.forEach(p => {
-    ctx.beginPath();
-    ctx.fillStyle = p.c;
-    ctx.arc(p.x, p.y += 4, p.r, 0, Math.PI*2);
-    ctx.fill();
-    if (p.y > innerHeight) p.y = -10;
-  });
-  requestAnimationFrame(draw);
-}
-
-/* Initial render */
-loadDay(dayNumber);
+};
