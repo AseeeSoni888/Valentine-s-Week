@@ -8,13 +8,11 @@
 </head>
 <body>
 
-  <!-- Music Button -->
   <button id="music-btn">🎵 Play Music</button>
 
   <h1>Seven Days, One Love</h1>
   <p class="subtitle">This page blooms a little more every day…</p>
 
-  <!-- Timeline -->
   <div class="timeline">
     <div class="day" data-day="1">🌹 Rose Day</div>
     <div class="day" data-day="2">💌 Propose Day</div>
@@ -25,40 +23,36 @@
     <div class="day" data-day="7">❤️ Valentine’s Day</div>
   </div>
 
-  <!-- Heart Pulse -->
-  <div id="heart" class="heart hidden">❤️</div>
-
-  <!-- Dynamic Content -->
   <div id="content"></div>
 
-  <!-- Rose Section (Day 1) -->
+  <!-- Rose Day -->
   <div id="rose-container" class="hidden">
     <div class="rose-svg">
       <svg viewBox="0 0 200 200">
-        <g>
-          <circle cx="100" cy="80" r="25" class="petal"/>
-          <circle cx="85" cy="95" r="25" class="petal"/>
-          <circle cx="115" cy="95" r="25" class="petal"/>
-          <circle cx="100" cy="110" r="25" class="petal"/>
-        </g>
+        <circle cx="100" cy="80" r="25" class="petal"/>
+        <circle cx="85" cy="95" r="25" class="petal"/>
+        <circle cx="115" cy="95" r="25" class="petal"/>
+        <circle cx="100" cy="110" r="25" class="petal"/>
         <rect x="95" y="120" width="10" height="50" class="stem"/>
       </svg>
     </div>
-
     <p id="rose-text">This rose blooms only for you 🌹</p>
-    <p id="secret" class="secret">
-      You make me feel safe being myself 🤍
-    </p>
+    <p id="secret" class="secret">You make me feel safe being myself 🤍</p>
   </div>
 
-  <!-- Hug Animation (Day 2) -->
-  <div id="hug" class="hug hidden">
-    <div class="person left">🧍‍♂️</div>
-    <div class="person right">🧍‍♀️</div>
-    <div class="hug-text">A warm hug, just for you 🤍</div>
+  <!-- Propose Day -->
+  <div id="proposal" class="hidden">
+    <h2>Will you be mine? 💌</h2>
+    <button class="choice-btn" onclick="acceptLove()">YES</button>
+    <button class="choice-btn" onclick="acceptLove()">ALWAYS</button>
   </div>
 
-  <!-- Background Music -->
+  <!-- Fullscreen Heart -->
+  <div id="fullscreen-heart" class="hidden">
+    ❤️
+    <p class="heart-text">You chose us ❤️</p>
+  </div>
+
   <audio id="bg-music" loop>
     <source src="music.mp3" type="audio/mp3">
   </audio>
