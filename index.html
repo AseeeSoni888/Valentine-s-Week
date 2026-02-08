@@ -8,63 +8,46 @@
 </head>
 <body>
 
+  <!-- Music Button -->
+  <button id="music-btn">🎵 Play Music</button>
+
   <h1>Seven Days, One Love</h1>
   <p class="subtitle">This page blooms a little more every day…</p>
 
+  <!-- Timeline -->
   <div class="timeline">
     <div class="day" data-day="1">🌹 Rose Day</div>
-    <div class="day" data-day="2">💍 Propose Day</div>
-    <div class="day" data-day="3">🍫 Chocolate Day</div>
-    <div class="day" data-day="4">🧸 Teddy Day</div>
-    <div class="day" data-day="5">🤝 Promise Day</div>
-    <div class="day" data-day="6">😘 Kiss Day</div>
-    <div class="day" data-day="7">❤️ Valentine’s Day</div>
+    <div class="day active" data-day="2">💌 Propose Day</div>
+    <div class="day">🍫 Chocolate Day</div>
+    <div class="day">🧸 Teddy Day</div>
+    <div class="day">🤝 Promise Day</div>
+    <div class="day">😘 Kiss Day</div>
+    <div class="day">❤️ Valentine’s Day</div>
   </div>
 
-  <div id="content"></div>
+  <!-- Heart Pulse -->
+  <div class="heart">❤️</div>
 
-  <!-- 💍 Propose Buttons -->
-  <div id="proposal-actions" class="hidden">
-    <button id="yes-btn">Yes ❤️</button>
-    <button id="always-btn">Always 💍</button>
-  </div>
-
-  <p id="proposal-response" class="hidden"></p>
-
-  <!-- 🌹 Rose Section -->
-  <div id="rose-container" class="hidden">
-    <div class="rose-svg">
-      <svg viewBox="0 0 200 200">
-        <circle cx="100" cy="80" r="25" class="petal"/>
-        <circle cx="85" cy="95" r="25" class="petal"/>
-        <circle cx="115" cy="95" r="25" class="petal"/>
-        <circle cx="100" cy="110" r="25" class="petal"/>
-        <rect x="95" y="120" width="10" height="50" class="stem"/>
-      </svg>
-    </div>
-
-    <p id="rose-text"></p>
-
-    <p id="secret" class="secret hidden">
-      There’s something I don’t say often…  
-      You make me feel safe being myself 🤍
+  <!-- Propose Message -->
+  <div id="content">
+    <p class="message">
+      I don’t know what the future holds…  
+      but I know I want *you* in it 💌  
     </p>
+
+    <button id="hug-btn">🤗 Come Here</button>
   </div>
 
-  <div id="petals"></div>
-
-  <!-- ❤️ Valentine Finale -->
-  <div id="valentine-overlay" class="hidden">
-    <div class="valentine-heart">❤️</div>
-    <p class="valentine-text">
-      This page ends here.<br />
-      But my love for you doesn’t.
-    </p>
+  <!-- Hug Animation -->
+  <div id="hug" class="hug hidden">
+    <div class="person left">🧍‍♂️</div>
+    <div class="person right">🧍‍♀️</div>
+    <div class="hug-text">A warm hug, just for you 🤍</div>
   </div>
 
-  <!-- 🎵 Music -->
+  <!-- Background Music -->
   <audio id="bg-music" loop>
-    <source src="music.mp3" type="audio/mp3" />
+    <source src="music.mp3" type="audio/mp3">
   </audio>
 
   <script src="script.js"></script>
