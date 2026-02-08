@@ -1,63 +1,3 @@
-body {
-  margin: 0;
-  padding: 20px;
-  font-family: Georgia, serif;
-  background: linear-gradient(to bottom, #ffe6eb, #ffffff);
-  text-align: center;
-}
-
-h1 { color: #b3003b; }
-.subtitle { color: #555; margin-bottom: 20px; }
-
-.timeline {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.day {
-  padding: 10px 15px;
-  border-radius: 20px;
-  background: #ddd;
-  cursor: not-allowed;
-}
-
-.day.active, .day.unlocked {
-  cursor: pointer;
-}
-
-.day.unlocked { background: #ffb3c6; }
-.day.active { background: #ff4d79; color: white; }
-
-.hidden { display: none; }
-
-/* Buttons */
-.choice-btn {
-  padding: 12px 25px;
-  font-size: 1.1em;
-  margin: 10px;
-  border-radius: 30px;
-  border: none;
-  background: #ff4d79;
-  color: white;
-  cursor: pointer;
-}
-
-/* Rose */
-.rose-svg { width: 120px; margin: auto; cursor: pointer; }
-.petal { fill: #c9184a; transition: transform 1.5s ease; transform-origin: center; }
-.stem { fill: #2d6a4f; }
-.bloom { transform: scale(1.2); }
-#rose-text.show { opacity: 1; transition: opacity 1.5s ease; }
-.secret.show { opacity: 1; transition: opacity 2s ease; }
-
-/* Hug */
-.hug { display: flex; justify-content: center; align-items: center; gap: 10px; margin: 20px 0; }
-.person { font-size: 50px; transition: transform 1s ease; }
-.hug-text { font-size: 1.2em; }
-
 /* Heart */
 #fullscreen-heart {
   position: fixed;
@@ -68,23 +8,15 @@ h1 { color: #b3003b; }
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  animation: pulse 1.2s infinite;
+  pointer-events: none; /* never block clicks */
   z-index: 999;
-  pointer-events: none;
-}
-.heart-text { font-size: 1.5rem; color: white; }
-
-/* Confetti */
-#confetti-canvas {
-  position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  pointer-events:none;
-  z-index: 998;
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
-/* Music button */
-#music-btn { padding: 10px 20px; border-radius: 20px; border:none; background:#ff4d79; color:white; cursor:pointer; margin-bottom:10px; }
+.pulse-animation {
+  opacity: 1;
+  animation: pulse 1.2s infinite;
+}
 
-/* Pulse animation */
-@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+.heart-text { font-size: 1.5rem; color: white; margin-top:20px; }
