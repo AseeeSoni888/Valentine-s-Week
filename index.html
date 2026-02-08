@@ -9,7 +9,7 @@
 <body>
 
   <h1>Seven Days, One Love</h1>
-  <p class="subtitle">This page blooms a little more every day…</p>
+  <p class="subtitle">Click a day to see the surprise…</p>
 
   <!-- Timeline -->
   <div class="timeline">
@@ -22,7 +22,7 @@
     <div class="day" data-day="7">❤️ Valentine’s Day</div>
   </div>
 
-  <!-- Dynamic Content -->
+  <!-- Content -->
   <div id="content"></div>
 
   <!-- Rose Day -->
@@ -43,8 +43,31 @@
   <!-- Propose Day -->
   <div id="proposal" class="hidden">
     <h2>Will you be mine? 💌</h2>
-    <button class="choice-btn" id="yes-btn">YES</button>
-    <button class="choice-btn" id="always-btn">ALWAYS</button>
+    <button id="yes-btn" class="choice-btn">YES</button>
+    <button id="always-btn" class="choice-btn">ALWAYS</button>
   </div>
 
-  <!-- Hug Animation
+  <!-- Hug Animation -->
+  <div id="hug" class="hug hidden">
+    <div class="person left">🧍‍♂️</div>
+    <div class="person right">🧍‍♀️</div>
+    <div class="hug-text">A warm hug, just for you 🤍</div>
+  </div>
+
+  <!-- Envelope Message -->
+  <div id="envelope" class="hidden">
+    <div class="envelope-front">💌</div>
+    <div class="envelope-text">You're my forever ❤️</div>
+  </div>
+
+  <!-- Confetti Canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Music -->
+  <audio id="bg-music" loop>
+    <source src="music.mp3" type="audio/mp3">
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
