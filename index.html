@@ -3,13 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <title>Seven Days, One Love</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
+  <!-- Music -->
+  <audio id="bg-music" loop>
+    <source src="music.mp3" type="audio/mp3">
+  </audio>
+
   <h1>Seven Days, One Love</h1>
-  <p class="subtitle">Click a day to see the surprise…</p>
+  <p class="subtitle">This page blooms a little more every day…</p>
 
   <!-- Timeline -->
   <div class="timeline">
@@ -22,7 +27,7 @@
     <div class="day" data-day="7">❤️ Valentine’s Day</div>
   </div>
 
-  <!-- Content -->
+  <!-- Dynamic Content -->
   <div id="content"></div>
 
   <!-- Rose Day -->
@@ -37,7 +42,6 @@
       </svg>
     </div>
     <p id="rose-text">This rose blooms only for you 🌹</p>
-    <p id="secret" class="secret">You make me feel safe being myself 🤍</p>
   </div>
 
   <!-- Propose Day -->
@@ -47,26 +51,14 @@
     <button id="always-btn" class="choice-btn">ALWAYS</button>
   </div>
 
-  <!-- Hug Animation -->
-  <div id="hug" class="hug hidden">
-    <div class="person left">🧍‍♂️</div>
-    <div class="person right">🧍‍♀️</div>
-    <div class="hug-text">A warm hug, just for you 🤍</div>
-  </div>
-
-  <!-- Envelope Message -->
+  <!-- Envelope + confetti -->
   <div id="envelope" class="hidden">
-    <div class="envelope-front">💌</div>
-    <div class="envelope-text">You're my forever ❤️</div>
+    <div class="envelope-content">
+      <p>You're my forever ❤️</p>
+    </div>
   </div>
 
-  <!-- Confetti Canvas -->
   <canvas id="confetti-canvas"></canvas>
-
-  <!-- Music -->
-  <audio id="bg-music" loop>
-    <source src="music.mp3" type="audio/mp3">
-  </audio>
 
   <script src="script.js"></script>
 </body>
