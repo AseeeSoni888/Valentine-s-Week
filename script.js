@@ -1,72 +1,63 @@
-const startDate = new Date("2026-02-07");
-const today = new Date();
-today.setHours(0,0,0,0);
+const canvas = document.getElementById("effects");
+const ctx = canvas.getContext("2d");
 
-const dayNumber = Math.min(
-  Math.max(Math.floor((today - startDate)/(1000*60*60*24))+1, 1),
-  7
-);
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-const days = document.querySelectorAll(".day");
-const content = document.getElementById("content");
-const rose = document.getElementById("rose-container");
-const roseText = document.getElementById("rose-text");
-const proposal = document.getElementById("proposal");
-const heart = document.getElementById("fullscreen-heart");
-const music = document.getElementById("bg-music");
-const musicBtn = document.getElementById("music-btn");
+let particles = [];
 
-heart.classList.add("hidden");
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resize);
 
-// Unlock days
-days.forEach(day => {
-  const d = Number(day.dataset.day);
-  if (d <= dayNumber) {
-    day.classList.add("unlocked");
-    day.addEventListener("click", () => loadDay(d));
-  }
-  if (d === dayNumber) {
-    day.classList.add("active");
-  }
-});
+/* Confetti + Hearts */
+function launchCelebration() {
+  particles = [];
 
-function loadDay(d) {
-  rose.classList.add("hidden");
-  proposal.classList.add("hidden");
-  content.innerText = "";
-
-  if (d === 1) {
-    content.innerText = "Tap the rose 🌹";
-    rose.classList.remove("hidden");
-  }
-
-  if (d === 2) {
-    content.innerText = "I have something to ask you 💌";
-    proposal.classList.remove("hidden");
+  for (let i = 0; i < 120; i++) {
+    particles.push({
+      x: canvas.width / 2,
+      y: canvas.height / 2,
+      size: Math.random() * 8 + 4,
+      speedX: (Math.random() - 0.5) * 10,
+      speedY: (Math.random() - 0.8) * 10,
+      life: 100,
+      color: `hsl(${Math.random() * 360},100%,70%)`
+    });
   }
 }
 
-// Rose click
-const roseEmoji = document.getElementById("rose");
-if (roseEmoji) {
-  roseEmoji.addEventListener("click", () => {
-    roseText.classList.remove("hidden");
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  particles.forEach((p, i) => {
+    ctx.fillStyle = p.color;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+
+    p.x += p.speedX;
+    p.y += p.speedY;
+    p.life--;
+
+    if (p.life <= 0) particles.splice(i, 1);
   });
+
+  requestAnimationFrame(animate);
 }
+animate();
 
-// Propose buttons (explicit binding)
-document.getElementById("yesBtn").addEventListener("click", showHeart);
-document.getElementById("alwaysBtn").addEventListener("click", showHeart);
-
-function showHeart() {
-  heart.classList.remove("hidden");
-}
-
-// Music
-musicBtn.addEventListener("click", () => {
-  music.volume = 0.4;
-  music.play();
-  musicBtn.innerText = "🎶 Playing";
+/* UI Logic */
+document.getElementById("proposeBtn").addEventListener("click", () => {
+  document.getElementById("choices").classList.remove("hidden");
 });
 
-loadDay(dayNumber);
+document.getElementById("yesBtn").addEventListener("click", () => {
+  launchCelebration();
+});
+
+document.getElementById("alwaysBtn").addEventListener("click", () => {
+  launchCelebration();
+});
