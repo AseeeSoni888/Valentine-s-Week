@@ -8,18 +8,14 @@ const heart = document.getElementById("fullscreen-heart");
 const heartMsg = document.getElementById("heart-msg");
 const envelope = document.getElementById("envelope");
 const music = document.getElementById("bg-music");
-const musicBtn = document.getElementById("music-btn");
 const yesBtn = document.getElementById("yes-btn");
 const alwaysBtn = document.getElementById("always-btn");
 const confettiCanvas = document.getElementById("confetti-canvas");
 const ctx = confettiCanvas.getContext('2d');
 
-// ===== Music Button =====
-musicBtn.onclick = () => {
-  music.volume = 0.4;
-  music.play();
-  musicBtn.innerText = "🎶 Playing";
-};
+// ===== Auto-play music =====
+music.volume = 0.4;
+music.play().catch(()=>{}); // in case browser blocks autoplay
 
 // ===== Confetti =====
 let confettiParticles = [];
@@ -99,9 +95,10 @@ function handleLove(choice){
   heart.classList.remove("hidden");
   heart.classList.add("pulse-animation");
   hug.classList.remove("hidden");
-  startConfetti();
   envelope.classList.remove("hidden");
+  startConfetti();
 
+  // Hide after 4 seconds
   setTimeout(()=>{
     heart.classList.add("hidden");
     heart.classList.remove("pulse-animation");
