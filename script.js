@@ -1,10 +1,10 @@
-// START DATE (Rose Day)
-const startDate = new Date("2026-02-06");
+// 🌹 Start date (Rose Day)
+const startDate = new Date("2026-02-07");
 const today = new Date();
-today.setHours(0,0,0,0);
+today.setHours(0, 0, 0, 0);
 
-// Calculate day number (1–7)
-const dayNumber = Math.min(
+// Calculate unlocked day (1–7)
+const unlockedDay = Math.min(
   Math.max(Math.floor((today - startDate) / 86400000) + 1, 1),
   7
 );
@@ -12,52 +12,72 @@ const dayNumber = Math.min(
 // Elements
 const days = document.querySelectorAll(".day");
 const content = document.getElementById("content");
-const heart = document.getElementById("heart");
 const roseContainer = document.getElementById("rose-container");
 const rose = document.querySelector(".rose-svg");
 const roseText = document.getElementById("rose-text");
 const secret = document.getElementById("secret");
+const heart = document.getElementById("heart");
 const hug = document.getElementById("hug");
 
-// Highlight active day
-days.forEach(d => {
-  if (parseInt(d.dataset.day) === dayNumber) {
-    d.classList.add("active");
+// Reset all sections
+function resetView() {
+  content.innerHTML = "";
+  roseContainer.classList.add("hidden");
+  heart?.classList.add("hidden");
+  hug?.classList.add("hidden");
+}
+
+// Enable & mark unlocked days
+days.forEach(day => {
+  const dayNum = parseInt(day.dataset.day);
+
+  if (dayNum <= unlockedDay) {
+    day.classList.add("active");
+    day.style.cursor = "pointer";
+
+    day.addEventListener("click", () => {
+      resetView();
+      showDay(dayNum);
+    });
   }
 });
 
-// Day-wise behavior
-if (dayNumber === 1) {
-  roseContainer.classList.remove("hidden");
-  content.textContent = "A rose for the one who makes my world softer 🌹";
+// Show day content
+function showDay(dayNum) {
+  if (dayNum === 1) {
+    roseContainer.classList.remove("hidden");
+    content.textContent = "A rose for the one who makes my world softer 🌹";
 
-  rose.addEventListener("click", () => {
-    rose.classList.add("bloom");
-    roseText.classList.add("show");
-    secret.classList.add("show");
-  });
+    rose.onclick = () => {
+      rose.classList.add("bloom");
+      roseText.classList.add("show");
+      secret.classList.add("show");
+    };
+  }
+
+  if (dayNum === 2) {
+    heart.classList.remove("hidden");
+    content.innerHTML = `
+      I don’t know where life takes us,<br>
+      but I know who I want beside me 💌<br><br>
+      <button id="hug-btn">🤗 Hug me</button>
+    `;
+
+    document.getElementById("hug-btn").onclick = () => {
+      hug.classList.remove("hidden");
+    };
+  }
 }
 
-if (dayNumber === 2) {
-  heart.classList.remove("hidden");
-  content.innerHTML = `
-    I don’t know where life takes us,  
-    but I know who I want beside me 💌  
-    <br><br>
-    <button id="hug-btn">🤗 Come Here</button>
-  `;
+// Auto-open today’s day
+showDay(unlockedDay);
 
-  document.getElementById("hug-btn").onclick = () => {
-    hug.classList.remove("hidden");
-  };
-}
-
-// Music
+// 🎵 Music
 const musicBtn = document.getElementById("music-btn");
 const music = document.getElementById("bg-music");
 let playing = false;
 
-musicBtn.addEventListener("click", () => {
+musicBtn.onclick = () => {
   if (!playing) {
     music.play();
     musicBtn.textContent = "⏸ Pause Music";
@@ -66,4 +86,4 @@ musicBtn.addEventListener("click", () => {
     musicBtn.textContent = "🎵 Play Music";
   }
   playing = !playing;
-});
+};
